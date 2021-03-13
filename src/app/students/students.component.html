@@ -1,0 +1,27 @@
+<div>
+  <div
+    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+  >
+    <h1 class="h2">Studenci</h1>
+  </div>
+  <div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Indeks</th>
+          <th scope="col">Imie</th>
+          <th scope="col">Nazwisko</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students; index as i">
+          <td>
+            {{ student.id }}
+          </td>
+          <td>{{ student.firstName }}</td>
+          <td>{{ student.lastName }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
