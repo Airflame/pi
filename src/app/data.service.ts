@@ -34,6 +34,13 @@ export class DataService {
       discipline: 'Informatyka',
       classYear: 'I'
     },
+    {
+      id: 2137,
+      firstName: 'Karol',
+      lastName: 'Wojtyła',
+      discipline: 'Informatyka',
+      classYear: 'XD'
+    },
   ];
 
   constructor() {}

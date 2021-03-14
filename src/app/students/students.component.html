@@ -15,7 +15,7 @@
       />
       <span class="ml-3" *ngIf="studentsService.loading$ | async">Ładowanie...</span>
     </div>
-    <table class="table table-striped">
+    <table class="table table-hover">
       <thead>
         <tr>
           <th scope="col">Zdjęcie</th>
@@ -37,7 +37,7 @@
             />
           </td>
           <td>
-            <ngb-highlight [result]="student.id | number" [term]="studentsService.searchTerm"></ngb-highlight>
+            <ngb-highlight [result]="student.id" [term]="studentsService.searchTerm"></ngb-highlight>
           </td>
           <td><ngb-highlight [result]="student.firstName" [term]="studentsService.searchTerm"></ngb-highlight></td>
           <td><ngb-highlight [result]="student.lastName" [term]="studentsService.searchTerm"></ngb-highlight></td>
