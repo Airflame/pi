@@ -5,7 +5,7 @@ export interface Student {
   firstName: string;
   lastName: string;
   discipline: string;
-  classYear: number;
+  classYear: string;
 }
 
 @Injectable({
@@ -18,21 +18,21 @@ export class DataService {
       firstName: 'Jan',
       lastName: 'Kowalski',
       discipline: 'Informatyka',
-      classYear: 1
+      classYear: 'I'
     },
     {
       id: 124,
       firstName: 'Adam',
       lastName: 'Nowak',
       discipline: 'Informatyka',
-      classYear: 2
+      classYear: 'II'
     },
     {
       id: 125,
       firstName: 'Julia',
       lastName: 'Zalewska',
       discipline: 'Informatyka',
-      classYear: 1
+      classYear: 'I'
     },
   ];
 

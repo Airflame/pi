@@ -5,33 +5,58 @@
     <h1 class="h2">Studenci</h1>
   </div>
   <div>
+    <div class="form-group form-inline">
+      Szukaj:
+      <input
+        class="form-control ml-2"
+        type="text"
+        name="searchTerm"
+        [(ngModel)]="studentsService.searchTerm"
+      />
+      <span class="ml-3" *ngIf="studentsService.loading$ | async">Ładowanie...</span>
+    </div>
     <table class="table table-striped">
       <thead>
         <tr>
           <th scope="col">Zdjęcie</th>
-          <th scope="col">Numer indeksu</th>
-          <th scope="col">Imie</th>
-          <th scope="col">Nazwisko</th>
-          <th scope="col">Kierunek</th>
-          <th scope="col">Rok studiów</th>
+          <th scope="col" sortable="id" (sort)="onSort($event)">Numer indeksu</th>
+          <th scope="col" sortable="firstName" (sort)="onSort($event)">Imie</th>
+          <th scope="col" sortable="lastName" (sort)="onSort($event)">Nazwisko</th>
+          <th scope="col" sortable="discipline" (sort)="onSort($event)">Kierunek</th>
+          <th scope="col" sortable="classYear" (sort)="onSort($event)">Rok studiów</th>
           <th scope="col">Akcje</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let student of students; index as i">
+        <tr *ngFor="let student of students$ | async; index as i">
           <td>
-              <img [src]="'../../assets/students/'+student.id+'.png'" class="rounded picture" alt="..." />
+            <img
+              [src]="'../../assets/images/students/' + student.id + '.png'"
+              class="rounded picture"
+              alt="..."
+            />
           </td>
           <td>
-            {{ student.id }}
+            <ngb-highlight [result]="student.id | number" [term]="studentsService.searchTerm"></ngb-highlight>
           </td>
-          <td>{{ student.firstName }}</td>
-          <td>{{ student.lastName }}</td>
-          <td>{{ student.discipline }}</td>
-          <td>{{ student.classYear }}</td>
+          <td><ngb-highlight [result]="student.firstName" [term]="studentsService.searchTerm"></ngb-highlight></td>
+          <td><ngb-highlight [result]="student.lastName" [term]="studentsService.searchTerm"></ngb-highlight></td>
+          <td><ngb-highlight [result]="student.discipline" [term]="studentsService.searchTerm"></ngb-highlight></td>
+          <td><ngb-highlight [result]="student.classYear" [term]="studentsService.searchTerm"></ngb-highlight></td>
           <td></td>
         </tr>
       </tbody>
     </table>
+    <div class="d-flex justify-content-between p-2">
+      <ngb-pagination
+        [collectionSize]="(total$ | async)!" [(page)]="studentsService.page" [pageSize]="studentsService.pageSize">
+      </ngb-pagination>
+
+      <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="studentsService.pageSize">
+        <option [ngValue]="2">2 items per page</option>
+        <option [ngValue]="4">4 items per page</option>
+        <option [ngValue]="6">6 items per page</option>
+      </select>
+    </div>
   </div>
 </div>
