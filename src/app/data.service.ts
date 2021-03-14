@@ -4,6 +4,8 @@ export interface Student {
   id: number;
   firstName: string;
   lastName: string;
+  discipline: string;
+  classYear: number;
 }
 
 @Injectable({
@@ -13,18 +15,24 @@ export class DataService {
   students: Student[] = [
     {
       id: 123,
-      firstName: 'asdf',
-      lastName: 'fdsa',
+      firstName: 'Jan',
+      lastName: 'Kowalski',
+      discipline: 'Informatyka',
+      classYear: 1
     },
     {
       id: 124,
-      firstName: 'hhhf',
-      lastName: 'zxc',
+      firstName: 'Adam',
+      lastName: 'Nowak',
+      discipline: 'Informatyka',
+      classYear: 2
     },
     {
       id: 125,
-      firstName: 'hfgfgf',
-      lastName: 'xxxx',
+      firstName: 'Julia',
+      lastName: 'Zalewska',
+      discipline: 'Informatyka',
+      classYear: 1
     },
   ];
 

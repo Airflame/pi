@@ -8,18 +8,28 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th scope="col">Indeks</th>
+          <th scope="col">Zdjęcie</th>
+          <th scope="col">Numer indeksu</th>
           <th scope="col">Imie</th>
           <th scope="col">Nazwisko</th>
+          <th scope="col">Kierunek</th>
+          <th scope="col">Rok studiów</th>
+          <th scope="col">Akcje</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let student of students; index as i">
           <td>
+              <img [src]="'../../assets/students/'+student.id+'.png'" class="rounded picture" alt="..." />
+          </td>
+          <td>
             {{ student.id }}
           </td>
           <td>{{ student.firstName }}</td>
           <td>{{ student.lastName }}</td>
+          <td>{{ student.discipline }}</td>
+          <td>{{ student.classYear }}</td>
+          <td></td>
         </tr>
       </tbody>
     </table>
