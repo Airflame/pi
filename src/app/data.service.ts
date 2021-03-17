@@ -59,6 +59,11 @@ export class DataService {
     edited.classYear = student.classYear;
   }
 
+  public deleteStudent(student: Student) {
+    const id = this.students.findIndex(s => s.id == student.id);
+    this.students.splice(id, 1);
+  }
+
   public getStudents(): Student[] {
     return this.students;
   }

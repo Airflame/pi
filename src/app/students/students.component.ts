@@ -56,4 +56,8 @@ export class StudentsComponent implements OnInit {
       this.studentsService.refresh();
     });
   }
+
+  deleteStudent(student: Student): void {
+    this.studentsService.deleteStudent(student);
+  }
 }

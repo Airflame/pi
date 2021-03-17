@@ -36,7 +36,7 @@ function sort(students: Student[], column: SortColumn, direction: string): Stude
 function matches(student: Student, term: string, pipe: PipeTransform) {
   return student.firstName.toLowerCase().includes(term.toLowerCase())
     || student.lastName.toLowerCase().includes(term.toLowerCase())
-    || pipe.transform(student.id).includes(term)
+    || student.id.toString().includes(term)
     || student.discipline.toLowerCase().includes(term.toLowerCase())
     || student.classYear.toLowerCase().includes(term.toLowerCase());
 }
@@ -75,6 +75,11 @@ export class StudentsService {
     });
 
     this._search$.next();
+  }
+
+  public deleteStudent(student: Student): void {
+    this.dataService.deleteStudent(student);
+    this.refresh();
   }
 
   get students$() { return this._students$.asObservable(); }
