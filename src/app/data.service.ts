@@ -12,7 +12,7 @@ export interface Student {
   providedIn: 'root',
 })
 export class DataService {
-  students: Student[] = [
+  private students: Student[] = [
     {
       id: 123,
       firstName: 'Jan',
@@ -42,10 +42,24 @@ export class DataService {
       classYear: 'XD'
     },
   ];
+  private disciplines: String[] = ["Informatyka", "Elektronika"];
+  private classYears: String[] = ["I", "II", "III", "IV", "V"];
 
   constructor() {}
 
+  public addStudent(student: Student) {
+    this.students.push(student);
+  }
+
   public getStudents(): Student[] {
     return this.students;
+  }
+
+  public getDisciplines(): String[] {
+    return this.disciplines;
+  }
+
+  public getClassYears(): String[] {
+    return this.classYears;
   }
 }

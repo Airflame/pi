@@ -1,5 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren, ɵɵqueryRefresh } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { DataService } from '../data.service';
@@ -22,12 +22,14 @@ export class StudentsComponent implements OnInit {
 
   constructor(
     public studentsService: StudentsService,
+    private dataService: DataService,
     private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
     this.students$ = this.studentsService.students$;
     this.total$ = this.studentsService.total$;
+    console.log(this.dataService.getStudents());
   }
 
   onSort({ column, direction }: SortEvent) {
@@ -45,5 +47,8 @@ export class StudentsComponent implements OnInit {
   open() {
     const modalRef = this.modalService.open(AddStudentDialogComponent);
     modalRef.componentInstance.name = 'World';
+    modalRef.result.then(val => {
+      this.studentsService.refresh();
+    });
   }
 }

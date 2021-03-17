@@ -58,6 +58,10 @@ export class StudentsService {
   };
 
   constructor(private dataService: DataService, private pipe: DecimalPipe) {
+    this.refresh();
+  }
+
+  public refresh(): void {
     this.students = this.dataService.getStudents();
     this._search$.pipe(
       tap(() => this._loading$.next(true)),

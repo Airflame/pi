@@ -13,13 +13,13 @@
   <div class="form-group row required">
     <label class="col-md-3 col-form-label">Imię</label>
     <div class="col-md-9">
-      <input type="text" class="form-control" />
+      <input type="text" class="form-control" [(ngModel)]="student.firstName" />
     </div>
   </div>
   <div class="form-group row required">
     <label class="col-md-3 col-form-label">Nazwisko</label>
     <div class="col-md-9">
-      <input type="text" class="form-control" />
+      <input type="text" class="form-control" [(ngModel)]="student.lastName"/>
     </div>
   </div>
   <div class="form-group row required">
@@ -44,9 +44,31 @@
       </div>
     </div>
   </div>
+  <div class="form-group row required">
+    <label class="col-md-3 col-form-label">Rok studiów</label>
+    <div class="col-md-9" ngbDropdown>
+      <button
+        class="btn btn-outline-primary"
+        id="dropdownClassYear"
+        ngbDropdownToggle
+      >
+        {{ student.classYear }}
+      </button>
+      <div ngbDropdownMenu aria-labelledby="dropdownClassYear">
+        <button
+          ngbDropdownItem
+          class="dropdown-item"
+          *ngFor="let classYear of classYears"
+          (click)="student.classYear = classYear"
+        >
+          {{ classYear }}
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-outline-dark" (click)="modal.close()">
+  <button type="button" class="btn btn-outline-dark" (click)="save(); modal.close()">
     Save
   </button>
 </div>
