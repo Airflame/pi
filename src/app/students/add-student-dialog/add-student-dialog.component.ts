@@ -8,8 +8,8 @@ import { DataService, Student } from 'src/app/data.service';
   styleUrls: ['./add-student-dialog.component.scss']
 })
 export class AddStudentDialogComponent implements OnInit {
-  public disciplines: String[];
-  public classYears: String[];
+  public disciplines: string[];
+  public classYears: string[];
   public student: Student;
 
   constructor(public modal: NgbActiveModal, private dataService: DataService) { }

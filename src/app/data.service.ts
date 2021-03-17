@@ -42,8 +42,8 @@ export class DataService {
       classYear: 'XD'
     },
   ];
-  private disciplines: String[] = ["Informatyka", "Elektronika"];
-  private classYears: String[] = ["I", "II", "III", "IV", "V"];
+  private disciplines: string[] = ["Informatyka", "Elektronika"];
+  private classYears: string[] = ["I", "II", "III", "IV", "V"];
 
   constructor() {}
 
@@ -51,15 +51,23 @@ export class DataService {
     this.students.push(student);
   }
 
+  public editStudent(student: Student) {
+    const edited = this.students.filter(s => s.id == student.id)[0];
+    edited.firstName = student.firstName;
+    edited.lastName = student.lastName;
+    edited.discipline = student.discipline;
+    edited.classYear = student.classYear;
+  }
+
   public getStudents(): Student[] {
     return this.students;
   }
 
-  public getDisciplines(): String[] {
+  public getDisciplines(): string[] {
     return this.disciplines;
   }
 
-  public getClassYears(): String[] {
+  public getClassYears(): string[] {
     return this.classYears;
   }
 }

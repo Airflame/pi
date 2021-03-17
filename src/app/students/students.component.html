@@ -14,7 +14,7 @@
         [(ngModel)]="studentsService.searchTerm"
       />
       <span class="ml-3" *ngIf="studentsService.loading$ | async">Ładowanie...</span>
-      <button type="button" class="btn btn-primary ml-auto" (click)="open()">
+      <button type="button" class="btn btn-primary ml-auto" (click)="addStudent()">
         + Dodaj
       </button>
     </div>
@@ -46,7 +46,7 @@
           <td><ngb-highlight [result]="student.lastName" [term]="studentsService.searchTerm"></ngb-highlight></td>
           <td><ngb-highlight [result]="student.discipline" [term]="studentsService.searchTerm"></ngb-highlight></td>
           <td><ngb-highlight [result]="student.classYear" [term]="studentsService.searchTerm"></ngb-highlight></td>
-          <td></td>
+          <td><i class="ti ti-pencil text-info" (click)="editStudent(student)"></i><i class="ti ti-trash text-danger ml-2"></i></td>
         </tr>
       </tbody>
     </table>

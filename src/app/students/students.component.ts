@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { DataService } from '../data.service';
 import { Student } from '../data.service';
 import { AddStudentDialogComponent } from './add-student-dialog/add-student-dialog.component';
+import { EditStudentDialogComponent } from './edit-student-dialog/edit-student-dialog.component';
 import { NgbdSortableHeader, SortEvent } from './sortable.directive';
 import { StudentsService } from './students.service';
 
@@ -22,18 +23,15 @@ export class StudentsComponent implements OnInit {
 
   constructor(
     public studentsService: StudentsService,
-    private dataService: DataService,
     private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
     this.students$ = this.studentsService.students$;
     this.total$ = this.studentsService.total$;
-    console.log(this.dataService.getStudents());
   }
 
   onSort({ column, direction }: SortEvent) {
-    // resetting other headers
     this.headers.forEach((header) => {
       if (header.sortable !== column) {
         header.direction = '';
@@ -44,9 +42,16 @@ export class StudentsComponent implements OnInit {
     this.studentsService.sortDirection = direction;
   }
 
-  open() {
+  addStudent(): void {
     const modalRef = this.modalService.open(AddStudentDialogComponent);
-    modalRef.componentInstance.name = 'World';
+    modalRef.result.then(val => {
+      this.studentsService.refresh();
+    });
+  }
+
+  editStudent(student: Student): void {
+    const modalRef = this.modalService.open(EditStudentDialogComponent);
+    modalRef.componentInstance.initialStudent = student;
     modalRef.result.then(val => {
       this.studentsService.refresh();
     });
