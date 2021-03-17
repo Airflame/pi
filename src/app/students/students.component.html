@@ -14,6 +14,9 @@
         [(ngModel)]="studentsService.searchTerm"
       />
       <span class="ml-3" *ngIf="studentsService.loading$ | async">Ładowanie...</span>
+      <button type="button" class="btn btn-primary ml-auto" (click)="open()">
+        + Dodaj
+      </button>
     </div>
     <table class="table table-hover">
       <thead>

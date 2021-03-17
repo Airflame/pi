@@ -1,0 +1,52 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Dodaj studenta</h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="modal.dismiss()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="form-group row required">
+    <label class="col-md-3 col-form-label">Imię</label>
+    <div class="col-md-9">
+      <input type="text" class="form-control" />
+    </div>
+  </div>
+  <div class="form-group row required">
+    <label class="col-md-3 col-form-label">Nazwisko</label>
+    <div class="col-md-9">
+      <input type="text" class="form-control" />
+    </div>
+  </div>
+  <div class="form-group row required">
+    <label class="col-md-3 col-form-label">Kierunek</label>
+    <div class="col-md-9" ngbDropdown>
+      <button
+        class="btn btn-outline-primary"
+        id="dropdownDiscipline"
+        ngbDropdownToggle
+      >
+        {{ student.discipline }}
+      </button>
+      <div ngbDropdownMenu aria-labelledby="dropdownDiscipline">
+        <button
+          ngbDropdownItem
+          class="dropdown-item"
+          *ngFor="let discipline of disciplines"
+          (click)="student.discipline = discipline"
+        >
+          {{ discipline }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="modal.close()">
+    Save
+  </button>
+</div>

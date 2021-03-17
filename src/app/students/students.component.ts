@@ -1,8 +1,10 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { DataService } from '../data.service';
 import { Student } from '../data.service';
+import { AddStudentDialogComponent } from './add-student-dialog/add-student-dialog.component';
 import { NgbdSortableHeader, SortEvent } from './sortable.directive';
 import { StudentsService } from './students.service';
 
@@ -10,7 +12,7 @@ import { StudentsService } from './students.service';
   selector: 'app-students',
   templateUrl: './students.component.html',
   styleUrls: ['./students.component.scss'],
-  providers: [StudentsService, DecimalPipe]
+  providers: [StudentsService, DecimalPipe],
 })
 export class StudentsComponent implements OnInit {
   students$: Observable<Student[]>;
@@ -18,16 +20,19 @@ export class StudentsComponent implements OnInit {
 
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
 
-  constructor(public studentsService: StudentsService) { }
+  constructor(
+    public studentsService: StudentsService,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit(): void {
     this.students$ = this.studentsService.students$;
     this.total$ = this.studentsService.total$;
   }
 
-  onSort({column, direction}: SortEvent) {
+  onSort({ column, direction }: SortEvent) {
     // resetting other headers
-    this.headers.forEach(header => {
+    this.headers.forEach((header) => {
       if (header.sortable !== column) {
         header.direction = '';
       }
@@ -37,4 +42,8 @@ export class StudentsComponent implements OnInit {
     this.studentsService.sortDirection = direction;
   }
 
+  open() {
+    const modalRef = this.modalService.open(AddStudentDialogComponent);
+    modalRef.componentInstance.name = 'World';
+  }
 }
