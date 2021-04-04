@@ -1,7 +1,7 @@
 <div
   class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
 >
-  <h1 class="h2">Studenci</h1>
+  <h2 class="h2">{{ student.firstName }} {{ student.lastName }}</h2>
 </div>
 <div class="container">
   <div class="row">
@@ -9,11 +9,7 @@
       <div class="container">
         <div class="row">
           <div class="col-4">
-            <img
-              [src]="this.url"
-              class="rounded picture"
-              alt="..."
-            />
+            <img [src]="this.url" class="rounded picture" alt="..." />
             <div class="mt-2">
               <button
                 type="button"
@@ -38,23 +34,46 @@
             </div>
           </div>
         </div>
-        <div class="row"></div>
+        <div class="row ml-1">
+          <h4 class="h4">Oceny</h4>
+          <table class="table table-hover mt-4">
+            <thead>
+              <tr>
+                <th scope="col">Przedmiot</th>
+                <th scope="col">Prowadzący</th>
+                <th scope="col">ECTS</th>
+                <th scope="col">Ocena</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>asd</td>
+                <td>asd</td>
+                <td>asd</td>
+                <td>asd</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
     <div class="col">
       <div>
-        <table class="table table-striped">
+        <h4 class="h4">Grupy zajęciowe</h4>
+        <table class="table table-hover mt-4">
           <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">a</th>
-              <th scope="col">b</th>
-              <th scope="col">c</th>
+              <th scope="col">Dzień tygodnia</th>
+              <th scope="col">Godziny</th>
+              <th scope="col">Przedmiot</th>
+              <th scope="col">Prowadzący</th>
+              <th scope="col">Sala</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <th scope="row">asd</th>
+              <td>asd</td>
+              <td>asd</td>
               <td>asd</td>
               <td>asd</td>
               <td>asd</td>

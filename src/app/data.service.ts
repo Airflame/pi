@@ -60,19 +60,19 @@ export class DataService {
   }
 
   public addStudentAvatar(id: number, image: ArrayBuffer) {
-    let avatar = this.studentAvatars.find(av => av.id = id);
+    let avatar = this.studentAvatars.find(av => av.id === id);
     if (avatar != null)
       avatar.image = image;
     else
       this.studentAvatars.push({id, image} as Avatar);
   }
 
-  public getStudentAvatar(id: number): ArrayBuffer {
+  public getStudentAvatar(id: number): string | ArrayBuffer {
     let avatar: Avatar = this.studentAvatars.find(a => a.id == id);
     if (avatar != null)
       return avatar.image;
     else
-      return null;
+      return "../../assets/images/blank.png";
   }
 
   public editStudent(student: Student) {
