@@ -65,9 +65,7 @@ export class StudentsService {
     this.students = this.dataService.getStudents();
     this._search$.pipe(
       tap(() => this._loading$.next(true)),
-      debounceTime(200),
       switchMap(() => this._search()),
-      delay(200),
       tap(() => this._loading$.next(false))
     ).subscribe(result => {
       this._students$.next(result.students);

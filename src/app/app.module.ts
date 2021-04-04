@@ -10,6 +10,8 @@ import { NgbdSortableHeader } from './students/sortable.directive';
 import { FormsModule } from '@angular/forms';
 import { AddStudentDialogComponent } from './students/add-student-dialog/add-student-dialog.component';
 import { EditStudentDialogComponent } from './students/edit-student-dialog/edit-student-dialog.component';
+import { StudentDetailsComponent } from './students/student-details/student-details.component';
+import { FileSaverModule } from 'ngx-filesaver';
 
 @NgModule({
   declarations: [
@@ -17,13 +19,15 @@ import { EditStudentDialogComponent } from './students/edit-student-dialog/edit-
     StudentsComponent,
     NgbdSortableHeader,
     AddStudentDialogComponent,
-    EditStudentDialogComponent
+    EditStudentDialogComponent,
+    StudentDetailsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     FormsModule,
+    FileSaverModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,67 @@
+<div
+  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+>
+  <h1 class="h2">Studenci</h1>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="container">
+        <div class="row">
+          <div class="col-4">
+            <img
+              [src]="this.url"
+              class="rounded picture"
+              alt="..."
+            />
+            <div class="mt-2">
+              <button
+                type="button"
+                class="btn btn-light"
+                onclick="document.getElementById('upload').click();"
+              >
+                Wrzuć zdjęcie
+              </button>
+              <input
+                type="file"
+                style="visibility: hidden"
+                id="upload"
+                (change)="handleFileInput($event.target)"
+              />
+            </div>
+          </div>
+          <div class="col-8">
+            <div class="border-left pl-2">
+              <p>Numer indeksu: {{ student.id }}</p>
+              <p>Kierunek: {{ student.discipline }}</p>
+              <p>Rok: {{ student.classYear }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row"></div>
+      </div>
+    </div>
+    <div class="col">
+      <div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">a</th>
+              <th scope="col">b</th>
+              <th scope="col">c</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">asd</th>
+              <td>asd</td>
+              <td>asd</td>
+              <td>asd</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

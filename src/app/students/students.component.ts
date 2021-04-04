@@ -23,6 +23,7 @@ export class StudentsComponent implements OnInit {
 
   constructor(
     public studentsService: StudentsService,
+    public dataService: DataService,
     private modalService: NgbModal
   ) {}
 

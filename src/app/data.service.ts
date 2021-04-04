@@ -8,6 +8,11 @@ export interface Student {
   classYear: string;
 }
 
+export interface Avatar {
+  id: number;
+  image: ArrayBuffer;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -44,11 +49,30 @@ export class DataService {
   ];
   private disciplines: string[] = ["Informatyka", "Elektronika"];
   private classYears: string[] = ["I", "II", "III", "IV", "V"];
+  private studentAvatars: Avatar[];
 
-  constructor() {}
+  constructor() {
+    this.studentAvatars = [] as Avatar[];
+  }
 
   public addStudent(student: Student) {
     this.students.push(student);
+  }
+
+  public addStudentAvatar(id: number, image: ArrayBuffer) {
+    let avatar = this.studentAvatars.find(av => av.id = id);
+    if (avatar != null)
+      avatar.image = image;
+    else
+      this.studentAvatars.push({id, image} as Avatar);
+  }
+
+  public getStudentAvatar(id: number): ArrayBuffer {
+    let avatar: Avatar = this.studentAvatars.find(a => a.id == id);
+    if (avatar != null)
+      return avatar.image;
+    else
+      return null;
   }
 
   public editStudent(student: Student) {
@@ -66,6 +90,10 @@ export class DataService {
 
   public getStudents(): Student[] {
     return this.students;
+  }
+
+  public getStudent(id: number) {
+    return this.students.find(s => s.id == id);
   }
 
   public getDisciplines(): string[] {
