@@ -2,7 +2,7 @@
   <div
     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
   >
-    <h1 class="h2">Studenci</h1>
+    <h2 class="h2">Prowadzący</h2>
   </div>
   <div>
     <div class="form-group form-inline">
@@ -11,15 +11,15 @@
         class="form-control ml-2"
         type="text"
         name="searchTerm"
-        [(ngModel)]="studentsService.searchTerm"
+        [(ngModel)]="teachersService.searchTerm"
       />
-      <span class="ml-3" *ngIf="studentsService.loading$ | async"
+      <span class="ml-3" *ngIf="teachersService.loading$ | async"
         >Ładowanie...</span
       >
       <button
         type="button"
         class="btn btn-primary ml-auto"
-        (click)="addStudent()"
+        (click)="addTeacher()"
       >
         + Dodaj
       </button>
@@ -28,76 +28,65 @@
       <thead>
         <tr>
           <th scope="col">Zdjęcie</th>
-          <th scope="col" sortable="id" (sort)="onSort($event)">
-            Numer indeksu
-          </th>
-          <th scope="col" sortable="firstName" (sort)="onSort($event)">Imie</th>
+          <th scope="col" sortable="title" (sort)="onSort($event)">Tytuł</th>
+          <th scope="col" sortable="firstName" (sort)="onSort($event)">Imię</th>
           <th scope="col" sortable="lastName" (sort)="onSort($event)">
             Nazwisko
           </th>
-          <th scope="col" sortable="discipline" (sort)="onSort($event)">
-            Kierunek
-          </th>
-          <th scope="col" sortable="classYear" (sort)="onSort($event)">
-            Rok studiów
+          <th scope="col" sortable="faculty" (sort)="onSort($event)">
+            Katedra
           </th>
           <th scope="col">Akcje</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let student of students$ | async; index as i">
+        <tr *ngFor="let teacher of teachers$ | async; index as i">
           <td>
             <img
-              [src]="dataService.getStudentAvatar(student.id)"
+              [src]="dataService.getTeacherAvatar(teacher.id)"
               class="rounded picture"
               alt="..."
             />
           </td>
           <td>
             <ngb-highlight
-              [result]="student.id"
-              [term]="studentsService.searchTerm"
+              [result]="teacher.title"
+              [term]="teachersService.searchTerm"
             ></ngb-highlight>
           </td>
           <td>
             <ngb-highlight
-              [result]="student.firstName"
-              [term]="studentsService.searchTerm"
+              [result]="teacher.firstName"
+              [term]="teachersService.searchTerm"
             ></ngb-highlight>
           </td>
           <td>
             <ngb-highlight
-              [result]="student.lastName"
-              [term]="studentsService.searchTerm"
+              [result]="teacher.lastName"
+              [term]="teachersService.searchTerm"
             ></ngb-highlight>
           </td>
           <td>
             <ngb-highlight
-              [result]="student.discipline"
-              [term]="studentsService.searchTerm"
-            ></ngb-highlight>
-          </td>
-          <td>
-            <ngb-highlight
-              [result]="student.classYear"
-              [term]="studentsService.searchTerm"
+              [result]="teacher.faculty"
+              [term]="teachersService.searchTerm"
             ></ngb-highlight>
           </td>
           <td>
             <i
               class="ti ti-layout-list-thumb text-info"
               ngbTooltip="Szczegóły"
-              [routerLink]="'/students/' + student.id"
+              [routerLink]="'/teachers/' + teacher.id"
             ></i>
             <i
               class="ti ti-pencil text-info ml-2"
               ngbTooltip="Edytuj"
-              (click)="editStudent(student)"
+              (click)="editTeacher(teacher)"
             ></i
             ><i
               class="ti ti-trash text-danger ml-2"
               ngbTooltip="Usuń"
-              (click)="deleteStudent(student)"
+              (click)="deleteTeacher(teacher)"
             ></i>
           </td>
         </tr>
@@ -106,15 +95,16 @@
     <div class="d-flex justify-content-between p-2">
       <ngb-pagination
         [collectionSize]="(total$ | async)!"
-        [(page)]="studentsService.page"
-        [pageSize]="studentsService.pageSize"
+        [(page)]="teachersService.page"
+        [pageSize]="teachersService.pageSize"
       >
       </ngb-pagination>
+
       <select
         class="custom-select"
         style="width: auto"
         name="pageSize"
-        [(ngModel)]="studentsService.pageSize"
+        [(ngModel)]="teachersService.pageSize"
       >
         <option [ngValue]="2">2 items per page</option>
         <option [ngValue]="4">4 items per page</option>

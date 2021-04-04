@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h4 class="modal-title" id="modal-basic-title">Edytuj studenta</h4>
+  <h4 class="modal-title" id="modal-basic-title">Edytuj prowadzącego</h4>
   <button
     type="button"
     class="close"
@@ -11,57 +11,57 @@
 </div>
 <div class="modal-body">
   <div class="form-group row required">
-    <label class="col-md-3 col-form-label">Imię</label>
-    <div class="col-md-9">
-      <input type="text" class="form-control" [(ngModel)]="student.firstName" />
-    </div>
-  </div>
-  <div class="form-group row required">
-    <label class="col-md-3 col-form-label">Nazwisko</label>
-    <div class="col-md-9">
-      <input type="text" class="form-control" [(ngModel)]="student.lastName"/>
-    </div>
-  </div>
-  <div class="form-group row required">
-    <label class="col-md-3 col-form-label">Kierunek</label>
+    <label class="col-md-3 col-form-label">Tytuł</label>
     <div class="col-md-9" ngbDropdown>
       <button
         class="btn btn-outline-primary"
         id="dropdownDiscipline"
         ngbDropdownToggle
       >
-        {{ student.discipline }}
+        {{ teacher.title }}
       </button>
       <div ngbDropdownMenu aria-labelledby="dropdownDiscipline">
         <button
           ngbDropdownItem
           class="dropdown-item"
-          *ngFor="let discipline of disciplines"
-          (click)="student.discipline = discipline"
+          *ngFor="let title of titles"
+          (click)="teacher.title = title"
         >
-          {{ discipline }}
+          {{ title }}
         </button>
       </div>
     </div>
   </div>
   <div class="form-group row required">
-    <label class="col-md-3 col-form-label">Rok studiów</label>
+    <label class="col-md-3 col-form-label">Imię</label>
+    <div class="col-md-9">
+      <input type="text" class="form-control" [(ngModel)]="teacher.firstName" />
+    </div>
+  </div>
+  <div class="form-group row required">
+    <label class="col-md-3 col-form-label">Nazwisko</label>
+    <div class="col-md-9">
+      <input type="text" class="form-control" [(ngModel)]="teacher.lastName"/>
+    </div>
+  </div>
+  <div class="form-group row required">
+    <label class="col-md-3 col-form-label">Katedra</label>
     <div class="col-md-9" ngbDropdown>
       <button
         class="btn btn-outline-primary"
         id="dropdownClassYear"
         ngbDropdownToggle
       >
-        {{ student.classYear }}
+        {{ teacher.faculty }}
       </button>
       <div ngbDropdownMenu aria-labelledby="dropdownClassYear">
         <button
           ngbDropdownItem
           class="dropdown-item"
-          *ngFor="let classYear of classYears"
-          (click)="student.classYear = classYear"
+          *ngFor="let faculty of faculties"
+          (click)="teacher.faculty = faculty"
         >
-          {{ classYear }}
+          {{ faculty }}
         </button>
       </div>
     </div>

@@ -12,6 +12,9 @@ import { AddStudentDialogComponent } from './students/add-student-dialog/add-stu
 import { EditStudentDialogComponent } from './students/edit-student-dialog/edit-student-dialog.component';
 import { StudentDetailsComponent } from './students/student-details/student-details.component';
 import { FileSaverModule } from 'ngx-filesaver';
+import { TeachersComponent } from './teachers/teachers.component';
+import { AddTeacherDialogComponent } from './teachers/add-teacher-dialog/add-teacher-dialog.component';
+import { EditTeacherDialogComponent } from './teachers/edit-teacher-dialog/edit-teacher-dialog.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { FileSaverModule } from 'ngx-filesaver';
     NgbdSortableHeader,
     AddStudentDialogComponent,
     EditStudentDialogComponent,
-    StudentDetailsComponent
+    StudentDetailsComponent,
+    TeachersComponent,
+    AddTeacherDialogComponent,
+    EditTeacherDialogComponent
   ],
   imports: [
     BrowserModule,
