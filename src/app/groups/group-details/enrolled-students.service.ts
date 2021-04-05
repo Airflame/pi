@@ -49,15 +49,15 @@ export class EnrolledStudentsService {
 
   private apply(): void {
     this._search$
-    .pipe(
-      tap(() => this._loading$.next(true)),
-      switchMap(() => this._search()),
-      tap(() => this._loading$.next(false))
-    )
-    .subscribe((result) => {
-      this._students$.next(result.students);
-      this._total$.next(result.total);
-    });
+      .pipe(
+        tap(() => this._loading$.next(true)),
+        switchMap(() => this._search()),
+        tap(() => this._loading$.next(false))
+      )
+      .subscribe((result) => {
+        this._students$.next(result.students);
+        this._total$.next(result.total);
+      });
 
     this._search$.next();
   }
@@ -102,18 +102,12 @@ export class EnrolledStudentsService {
   }
 
   private _search(): Observable<SearchResult> {
-    const {
-      pageSize,
-      page,
-      searchTerm,
-    } = this._state;
+    const { pageSize, page, searchTerm } = this._state;
 
-    let students = this.students;
+    let students = this.students.sort((a, b) => a.id - b.id);
 
     // 2. filter
-    students = students.filter((student) =>
-      matches(student, searchTerm)
-    );
+    students = students.filter((student) => matches(student, searchTerm));
     const total = students.length;
 
     // 3. paginate

@@ -100,6 +100,10 @@ export class AvailableStudentsService {
 
   public enroll() {
     this.dataService.enrollStudents(this.group, this.selectedStudents);
+    this.selectedAll = false;
+    this.selected = new Map();
+    this.selectedStudents = [];
+    this.refresh(this.group);
   }
 
   get students$() {

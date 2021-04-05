@@ -43,4 +43,9 @@ export class GroupDetailsComponent implements OnInit {
       this.studentsService.refresh(this.group);
     });
   }
+
+  deleteStudent(student: Student): void {
+    this.dataService.deleteEnrolledStudent(this.group, student);
+    this.studentsService.refresh(this.group);
+  }
 }
