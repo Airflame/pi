@@ -296,6 +296,21 @@ export class DataService {
     this.groups.push(group);
   }
 
+  public editGroup(group: Group) {
+    const edited = this.groups.filter((g) => g.id == group.id)[0];
+    edited.max = group.max;
+    edited.room = group.room;
+    edited.subject = group.subject;
+    edited.teacher = group.teacher;
+    edited.toHour = group.toHour;
+  }
+
+  public deleteGroup(group: Group) {
+    const id = this.teachers.findIndex((g) => g.id == group.id);
+    this.groups.splice(id, 1);
+    this.enrollments = this.enrollments.filter(e => e.group.id != group.id);
+  }
+
   public getGroups(): Group[] {
     return this.groups.sort((a, b) => {
       if (a.subject.discipline == b.subject.discipline)

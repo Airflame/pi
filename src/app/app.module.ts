@@ -21,6 +21,8 @@ import { TeacherDetailsComponent } from './teachers/teacher-details/teacher-deta
 import { TeacherScheduleComponent } from './teachers/teacher-details/teacher-schedule/teacher-schedule.component';
 import { GroupsComponent } from './groups/groups.component';
 import { AddGroupDialogComponent } from './groups/add-group-dialog/add-group-dialog.component';
+import { EditGroupDialogComponent } from './groups/edit-group-dialog/edit-group-dialog.component';
+import { GroupDetailsComponent } from './groups/group-details/group-details.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { AddGroupDialogComponent } from './groups/add-group-dialog/add-group-dia
     TeacherDetailsComponent,
     TeacherScheduleComponent,
     GroupsComponent,
-    AddGroupDialogComponent
+    AddGroupDialogComponent,
+    EditGroupDialogComponent,
+    GroupDetailsComponent
   ],
   imports: [
     BrowserModule,

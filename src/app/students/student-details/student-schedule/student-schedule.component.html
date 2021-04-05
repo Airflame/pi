@@ -33,6 +33,7 @@
         <th>Przedmiot</th>
         <th>Prowadzący</th>
         <th>Sala</th>
+        <th>Akcje</th>
       </tr>
     </thead>
     <tbody>
@@ -51,6 +52,13 @@
           >
         </td>
         <td>{{ group.room }}</td>
+        <td>
+          <i
+            class="ti ti-layout-list-thumb text-info"
+            ngbTooltip="Szczegóły"
+            [routerLink]="'/groups/' + group.id"
+          ></i>
+        </td>
       </tr>
     </tbody>
   </table>
