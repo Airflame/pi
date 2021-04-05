@@ -16,11 +16,71 @@
       <span class="ml-3" *ngIf="studentsService.loading$ | async"
         >Ładowanie...</span
       >
-      <button
-        type="button"
-        class="btn btn-primary ml-auto"
-        (click)="addStudent()"
-      >
+      <div ngbDropdown class="d-inline-block ml-auto">
+        <button
+          class="btn btn-outline-primary"
+          id="dropdownBasic1"
+          ngbDropdownToggle
+        >
+          <span *ngIf="selectedDiscipline == null">Wszystkie kierunki</span>
+          <span *ngIf="selectedDiscipline != null">{{
+            selectedDiscipline
+          }}</span>
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button
+            ngbDropdownItem
+            (click)="
+              selectedDiscipline = null;
+              studentsService.setSelectedDiscipline(null)
+            "
+          >
+            Wszystkie kierunki
+          </button>
+          <button
+            ngbDropdownItem
+            *ngFor="let discipline of disciplines"
+            (click)="
+              selectedDiscipline = discipline;
+              studentsService.setSelectedDiscipline(discipline)
+            "
+          >
+            {{ discipline }}
+          </button>
+        </div>
+      </div>
+      <div ngbDropdown class="d-inline-block ml-2">
+        <button
+          class="btn btn-outline-primary"
+          id="dropdownBasic1"
+          ngbDropdownToggle
+        >
+          <span *ngIf="selectedClassYear == null">Wszystkie lata</span>
+          <span *ngIf="selectedClassYear != null">{{ selectedClassYear }}</span>
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button
+            ngbDropdownItem
+            (click)="
+              selectedClassYear = null;
+              studentsService.setSelectedClassYear(null)
+            "
+          >
+            Wszystkie lata
+          </button>
+          <button
+            ngbDropdownItem
+            *ngFor="let classYear of classYears"
+            (click)="
+              selectedClassYear = classYear;
+              studentsService.setSelectedClassYear(classYear)
+            "
+          >
+            {{ classYear }}
+          </button>
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary ml-2" (click)="addStudent()">
         + Dodaj
       </button>
     </div>

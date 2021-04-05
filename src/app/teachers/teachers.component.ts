@@ -6,7 +6,7 @@ import { DataService } from '../data.service';
 import { Teacher } from '../data.service';
 import { AddTeacherDialogComponent } from './add-teacher-dialog/add-teacher-dialog.component';
 import { EditTeacherDialogComponent } from './edit-teacher-dialog/edit-teacher-dialog.component';
-import { NgbdSortableHeader, SortEvent } from './sortable.directive';
+import { NgbdSortableHeader, SortColumn, SortDirection, SortEvent } from './sortable.directive';
 import { TeachersService } from './teachers.service';
 
 @Component({
@@ -18,8 +18,8 @@ import { TeachersService } from './teachers.service';
 export class TeachersComponent implements OnInit {
   teachers$: Observable<Teacher[]>;
   total$: Observable<number>;
-
-  @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
+  column: SortColumn;
+  direction: SortDirection;
 
   constructor(
     public teachersService: TeachersService,
@@ -33,12 +33,8 @@ export class TeachersComponent implements OnInit {
   }
 
   onSort({ column, direction }: SortEvent) {
-    this.headers.forEach((header) => {
-      if (header.sortable !== column) {
-        header.direction = '';
-      }
-    });
-
+    this.column = column;
+    this.direction = direction;
     this.teachersService.sortColumn = column;
     this.teachersService.sortDirection = direction;
   }
