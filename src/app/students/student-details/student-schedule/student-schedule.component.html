@@ -40,7 +40,7 @@
         <td>
           {{ dataService.getDay(group.day) }}
           <span *ngIf="selectedWeek == weekAll">
-            {{ group.week == weekP ? "P" : group.week == weekN ? "N" : "" }}
+            {{ group.week == weekP ? "(P)" : group.week == weekN ? "(N)" : "" }}
           </span>
         </td>
         <td>{{ group.fromHour }} - {{ group.toHour }}</td>
