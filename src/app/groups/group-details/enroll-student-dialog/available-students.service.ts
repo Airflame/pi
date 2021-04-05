@@ -31,7 +31,9 @@ export class AvailableStudentsService {
   private _search$ = new Subject<void>();
   private _students$ = new BehaviorSubject<Student[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
-  private selected: Student[] = [];
+  public selected: Map<number, boolean> = new Map();
+  public selectedAll: boolean;
+  private selectedStudents: Student[] = [];
   private group: Group;
 
   private _state: State = {
@@ -41,26 +43,27 @@ export class AvailableStudentsService {
   };
 
   constructor(private dataService: DataService) {
-    this.students$.subscribe()
+    this.students$.subscribe();
   }
 
   public refresh(group: Group): void {
     this.students = this.dataService.getAvailableStudents(group);
+    this.students.forEach((s) => this.selected.set(s.id, false));
     this.group = group;
     this.apply();
   }
 
   private apply(): void {
     this._search$
-    .pipe(
-      tap(() => this._loading$.next(true)),
-      switchMap(() => this._search()),
-      tap(() => this._loading$.next(false))
-    )
-    .subscribe((result) => {
-      this._students$.next(result.students);
-      this._total$.next(result.total);
-    });
+      .pipe(
+        tap(() => this._loading$.next(true)),
+        switchMap(() => this._search()),
+        tap(() => this._loading$.next(false))
+      )
+      .subscribe((result) => {
+        this._students$.next(result.students);
+        this._total$.next(result.total);
+      });
 
     this._search$.next();
   }
@@ -68,25 +71,35 @@ export class AvailableStudentsService {
   public select(student: Student, value: boolean) {
     if (value) {
       if (student != null) {
-        if (this.selected.find(s => s.id == student.id) == null)
-          this.selected.push(student);
+        this.selected.set(student.id, true);
+        if (this.selectedStudents.find((s) => s.id == student.id) == null)
+          this.selectedStudents.push(student);
+      } else {
+        this.selectedStudents = [];
+        this.students.forEach((s) => this.selectedStudents.push(s));
+        this.selected.forEach((v: boolean, key: number) => {
+          this.selected.set(key, true);
+        });
+      }
+    } else {
+      if (student != null) {
+        this.selected.set(student.id, false);
+        this.selectedStudents = this.selectedStudents.filter(
+          (s) => s.id != student.id
+        );
       }
       else {
-        this.selected = [];
-        this.students.forEach(s => this.selected.push(s));
+        this.selectedStudents = [];
+        this.selected.forEach((v: boolean, key: number) => {
+          this.selected.set(key, false);
+        });
       }
     }
-    else {
-      if (student != null)
-        this.selected = this.selected.filter(s => s.id != student.id);
-      else
-        this.selected = [];
-    }
-    console.log(this.selected);
+    console.log(this.selectedStudents);
   }
 
   public enroll() {
-    this.dataService.enrollStudents(this.group, this.selected);
+    this.dataService.enrollStudents(this.group, this.selectedStudents);
   }
 
   get students$() {
@@ -124,18 +137,12 @@ export class AvailableStudentsService {
   }
 
   private _search(): Observable<SearchResult> {
-    const {
-      pageSize,
-      page,
-      searchTerm,
-    } = this._state;
+    const { pageSize, page, searchTerm } = this._state;
 
     let students = this.students;
 
     // 2. filter
-    students = students.filter((student) =>
-      matches(student, searchTerm)
-    );
+    students = students.filter((student) => matches(student, searchTerm));
     const total = students.length;
 
     // 3. paginate

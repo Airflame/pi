@@ -32,8 +32,8 @@
                 type="checkbox"
                 class="form-check-input"
                 id="checkAll"
-                [checked]="selectedAll"
-                [(ngModel)]="selectedAll"
+                [checked]="studentsService.selectedAll"
+                [(ngModel)]="studentsService.selectedAll"
                 (click)="selectAll($event.target.checked)"
               />
             </div>
@@ -52,8 +52,7 @@
                 type="checkbox"
                 class="form-check-input"
                 [id]="'check'"
-                [checked]="selected[i]"
-                [(ngModel)]="selected[i]"
+                [checked]="studentsService.selected.get(student.id)"
                 (click)="select(student, $event.target.checked)"
               />
             </div>

@@ -12,8 +12,6 @@ import { AvailableStudentsService } from './available-students.service';
 export class EnrollStudentDialogComponent implements OnInit {
   group: Group;
   students$: Observable<Student[]>;
-  selected: boolean[];
-  selectedAll: boolean;
   total$: Observable<number>;
 
   constructor(
@@ -25,21 +23,16 @@ export class EnrollStudentDialogComponent implements OnInit {
   ngOnInit(): void {
     this.studentsService.refresh(this.group);
     this.students$ = this.studentsService.students$;
-    this.selected = this.dataService
-      .getAvailableStudents(this.group)
-      .map((s) => false);
     this.total$ = this.studentsService.total$;
   }
 
   select(student: Student, value: boolean) {
     this.studentsService.select(student, value);
-    if (value == false)
-      this.selectedAll = false;
+    if (value == false) this.studentsService.selectedAll = false;
   }
 
   selectAll(value: boolean) {
     this.studentsService.select(null, value);
-    this.selected = this.selected.map(s => value);
   }
 
   save() {
