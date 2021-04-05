@@ -285,6 +285,13 @@ export class DataService {
     this.enrollments.splice(id, 1);
   }
 
+  public enrollStudents(group: Group, students: Student[]): void {
+    let grade: number = null;
+    students.forEach((student) =>
+      this.enrollments.push({ group, student, grade } as Enrollment)
+    );
+  }
+
   public getStudent(id: number) {
     return this.students.find((s) => s.id == id);
   }

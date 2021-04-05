@@ -41,4 +41,8 @@ export class EnrollStudentDialogComponent implements OnInit {
     this.studentsService.select(null, value);
     this.selected = this.selected.map(s => value);
   }
+
+  save() {
+    this.studentsService.enroll();
+  }
 }

@@ -32,6 +32,7 @@ export class AvailableStudentsService {
   private _students$ = new BehaviorSubject<Student[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
   private selected: Student[] = [];
+  private group: Group;
 
   private _state: State = {
     page: 1,
@@ -45,6 +46,7 @@ export class AvailableStudentsService {
 
   public refresh(group: Group): void {
     this.students = this.dataService.getAvailableStudents(group);
+    this.group = group;
     this.apply();
   }
 
@@ -81,6 +83,10 @@ export class AvailableStudentsService {
         this.selected = [];
     }
     console.log(this.selected);
+  }
+
+  public enroll() {
+    this.dataService.enrollStudents(this.group, this.selected);
   }
 
   get students$() {
