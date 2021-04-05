@@ -56,7 +56,9 @@
           ngbDropdownToggle
         >
           <span *ngIf="selectedClassYear == null">Wszystkie lata</span>
-          <span *ngIf="selectedClassYear != null">{{ selectedClassYear }}</span>
+          <span *ngIf="selectedClassYear != null"
+            >Rok {{ selectedClassYear }}</span
+          >
         </button>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
           <button
@@ -76,7 +78,7 @@
               studentsService.setSelectedClassYear(classYear)
             "
           >
-            {{ classYear }}
+            Rok {{ classYear }}
           </button>
         </div>
       </div>

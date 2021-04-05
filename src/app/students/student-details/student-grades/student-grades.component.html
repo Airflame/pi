@@ -1,4 +1,30 @@
-<h4 class="h4">Oceny</h4>
+<div class="form-group form-inline">
+  <h4 class="h4">Oceny</h4>
+  <div ngbDropdown class="d-inline-block ml-auto">
+    <button
+      class="btn btn-outline-primary"
+      id="dropdownBasic1"
+      ngbDropdownToggle
+    >
+      <span *ngIf="selectedSemester == null">Wszystkie semestry</span>
+      <span *ngIf="selectedSemester != null"
+        >Semestr {{ selectedSemester }}</span
+      >
+    </button>
+    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+      <button ngbDropdownItem (click)="selectedSemester = null; filter()">
+        Wszystkie semestry
+      </button>
+      <button
+        ngbDropdownItem
+        *ngFor="let semester of semesters"
+        (click)="selectedSemester = semester; filter()"
+      >
+        Semestr {{ semester }}
+      </button>
+    </div>
+  </div>
+</div>
 <div class="overflow-auto mt-4">
   <table class="table table-hover">
     <thead>

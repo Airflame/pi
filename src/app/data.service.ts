@@ -150,7 +150,7 @@ export class DataService {
       teacher: this.teachers[1],
       room: '3A',
       max: 25,
-      week: Week.ALL,
+      week: Week.N,
       day: 2,
       fromHour: '10:00',
       toHour: '12:00',
