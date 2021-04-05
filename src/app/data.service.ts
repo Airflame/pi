@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
 
+export enum Week {
+  ALL,
+  N,
+  P
+}
+
 export interface Student {
   id: number;
   firstName: string;
@@ -19,6 +25,38 @@ export interface Teacher {
 export interface Avatar {
   id: number;
   image: ArrayBuffer;
+}
+
+export interface Subject {
+  name: string;
+  semester: number;
+  discipline: string;
+  ects: number;
+}
+
+export interface Grade {
+  studentId: number;
+  subject: Subject;
+  teacher: string;
+  grade: number;
+}
+
+export interface Group {
+  id: number;
+  subject: Subject;
+  teacher: Teacher;
+  room: string;
+  max: number;
+  week: Week;
+  day: number;
+  fromHour: string;
+  toHour: string;
+}
+
+export interface Enrollment {
+  group: Group;
+  student: Student;
+  grade: number;
 }
 
 @Injectable({
@@ -78,6 +116,35 @@ export class DataService {
       faculty: "Katedra Inżynierii Komputerowej"
     }
   ]
+  private subjects: Subject[] = [
+    {
+      name: "Technika cyfrowa",
+      semester: 1,
+      discipline: "Informatyka",
+      ects: 4
+    }
+  ]
+  private groups: Group[] = [
+    {
+      id: 1,
+      subject: this.subjects[0],
+      teacher: this.teachers[0],
+      room: "3A",
+      max: 25,
+      week: Week.ALL,
+      day: 1,
+      fromHour: "08:00",
+      toHour: "10:00"
+    }
+  ]
+  private enrollments: Enrollment[] = [
+    {
+      group: this.groups[0],
+      student: this.students[0],
+      grade: 4.5
+    }
+  ]
+
   private disciplines: string[] = ["Informatyka", "Elektronika"];
   private classYears: string[] = ["I", "II", "III", "IV", "V"];
   private titles: string[] = ["inż.", "mgr inż.", "dr inż.", "dr hab. inż.", "prof. dr hab. inż."];
@@ -174,5 +241,22 @@ export class DataService {
 
   public getFaculties(): string[] {
     return this.faculties;
+  }
+
+  public getGrades(studentId: number): Grade[] {
+    return this.enrollments.filter(e => e.student.id == studentId).map(e => this.mapToGrade(e));
+  }
+
+  public getGroups(studentId: number): Group[] {
+    return this.enrollments.filter(e => e.student.id == studentId).map(e => e.group);
+  }
+
+  private mapToGrade(enrollment: Enrollment): Grade {
+    let grade = {} as Grade;
+    grade.studentId = enrollment.student.id;
+    grade.subject = enrollment.group.subject;
+    grade.teacher = enrollment.group.teacher.lastName + " " + enrollment.group.teacher.firstName;
+    grade.grade = enrollment.grade;
+    return grade;
   }
 }

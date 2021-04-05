@@ -1,0 +1,21 @@
+<h4 class="h4">Oceny</h4>
+<div class="overflow-auto mt-4">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Przedmiot</th>
+        <th>Prowadzący</th>
+        <th>ECTS</th>
+        <th>Ocena</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let grade of grades; index as i">
+        <td>{{ grade.subject.name }}</td>
+        <td>{{ grade.teacher }}</td>
+        <td>{{ grade.subject.ects }}</td>
+        <td>{{ grade.grade }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

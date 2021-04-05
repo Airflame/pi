@@ -15,6 +15,8 @@ import { FileSaverModule } from 'ngx-filesaver';
 import { TeachersComponent } from './teachers/teachers.component';
 import { AddTeacherDialogComponent } from './teachers/add-teacher-dialog/add-teacher-dialog.component';
 import { EditTeacherDialogComponent } from './teachers/edit-teacher-dialog/edit-teacher-dialog.component';
+import { StudentGradesComponent } from './students/student-details/student-grades/student-grades.component';
+import { StudentScheduleComponent } from './students/student-details/student-schedule/student-schedule.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { EditTeacherDialogComponent } from './teachers/edit-teacher-dialog/edit-
     StudentDetailsComponent,
     TeachersComponent,
     AddTeacherDialogComponent,
-    EditTeacherDialogComponent
+    EditTeacherDialogComponent,
+    StudentGradesComponent,
+    StudentScheduleComponent
   ],
   imports: [
     BrowserModule,
