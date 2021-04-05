@@ -57,6 +57,8 @@ export class StudentsService {
   private _total$ = new BehaviorSubject<number>(0);
   private selectedDiscipline: string;
   private selectedClassYear: string;
+  public disciplines: string[];
+  public classYears: string[];
 
   private _state: State = {
     page: 1,
@@ -72,6 +74,8 @@ export class StudentsService {
 
   public refresh(): void {
     this.students = this.dataService.getStudents();
+    this.disciplines = this.dataService.getDisciplines();
+    this.classYears = this.dataService.getClassYears();
     this.apply();
   }
 

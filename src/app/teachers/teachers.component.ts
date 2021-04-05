@@ -18,6 +18,8 @@ import { TeachersService } from './teachers.service';
 export class TeachersComponent implements OnInit {
   teachers$: Observable<Teacher[]>;
   total$: Observable<number>;
+  faculties: string[];
+  selectedFaculty: string;
   column: SortColumn;
   direction: SortDirection;
 
@@ -30,6 +32,7 @@ export class TeachersComponent implements OnInit {
   ngOnInit(): void {
     this.teachers$ = this.teachersService.teachers$;
     this.total$ = this.teachersService.total$;
+    this.faculties = [...new Set(this.dataService.getTeachers().map(t => t.faculty))];
   }
 
   onSort({ column, direction }: SortEvent) {

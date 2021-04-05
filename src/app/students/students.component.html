@@ -39,7 +39,7 @@
           </button>
           <button
             ngbDropdownItem
-            *ngFor="let discipline of disciplines"
+            *ngFor="let discipline of studentsService.disciplines"
             (click)="
               selectedDiscipline = discipline;
               studentsService.setSelectedDiscipline(discipline)
@@ -70,7 +70,7 @@
           </button>
           <button
             ngbDropdownItem
-            *ngFor="let classYear of classYears"
+            *ngFor="let classYear of studentsService.classYears"
             (click)="
               selectedClassYear = classYear;
               studentsService.setSelectedClassYear(classYear)

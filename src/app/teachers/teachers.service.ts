@@ -47,6 +47,8 @@ export class TeachersService {
   private _search$ = new Subject<void>();
   private _teachers$ = new BehaviorSubject<Teacher[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
+  private selectedFaculty: string;
+  public faculties: string[];
 
   private _state: State = {
     page: 1,
@@ -62,6 +64,11 @@ export class TeachersService {
 
   public refresh(): void {
     this.teachers = this.dataService.getTeachers();
+    this.faculties = [...new Set(this.dataService.getTeachers().map(t => t.faculty))];
+    this.apply();
+  }
+
+  private apply(): void {
     this._search$.pipe(
       tap(() => this._loading$.next(true)),
       switchMap(() => this._search()),
@@ -72,6 +79,11 @@ export class TeachersService {
     });
 
     this._search$.next();
+  }
+
+  public setSelectedFaculty(selectedFaculty: string) {
+    this.selectedFaculty = selectedFaculty;
+    this.apply();
   }
 
   public deleteTeacher(teacher: Teacher): void {
@@ -104,6 +116,8 @@ export class TeachersService {
     let teachers = sort(this.teachers, sortColumn, sortDirection);
 
     // 2. filter
+    if (this.selectedFaculty != null)
+      teachers = teachers.filter(teacher => teacher.faculty == this.selectedFaculty);
     teachers = teachers.filter(teacher => matches(teacher, searchTerm, this.pipe));
     const total = teachers.length;
 

@@ -100,7 +100,7 @@ export class DataService {
       title: 'dr inż.',
       firstName: 'Jan',
       lastName: 'Kowalski',
-      faculty: 'Katedra Inżynierii Komputerowej',
+      faculty: 'Katedra Elektroniki',
     },
     {
       id: 2,

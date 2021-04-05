@@ -18,8 +18,8 @@ import { StudentsService } from './students.service';
 export class StudentsComponent implements OnInit {
   students$: Observable<Student[]>;
   total$: Observable<number>;
-  disciplines: string[];
-  classYears: string[];
+  selectedDiscipline: string;
+  selectedClassYear: string;
 
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
 
@@ -32,8 +32,6 @@ export class StudentsComponent implements OnInit {
   ngOnInit(): void {
     this.students$ = this.studentsService.students$;
     this.total$ = this.studentsService.total$;
-    this.disciplines = this.dataService.getDisciplines();
-    this.classYears = this.dataService.getClassYears();
   }
 
   onSort({ column, direction }: SortEvent) {
