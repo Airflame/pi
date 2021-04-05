@@ -37,7 +37,7 @@ export interface Subject {
 export interface Grade {
   studentId: number;
   subject: Subject;
-  teacher: string;
+  teacher: Teacher;
   grade: number;
 }
 
@@ -312,10 +312,7 @@ export class DataService {
     let grade = {} as Grade;
     grade.studentId = enrollment.student.id;
     grade.subject = enrollment.group.subject;
-    grade.teacher =
-      enrollment.group.teacher.lastName +
-      ' ' +
-      enrollment.group.teacher.firstName;
+    grade.teacher = enrollment.group.teacher;
     grade.grade = enrollment.grade;
     return grade;
   }

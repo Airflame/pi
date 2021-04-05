@@ -38,7 +38,11 @@
     <tbody>
       <tr *ngFor="let grade of grades; index as i">
         <td>{{ grade.subject.name }}</td>
-        <td>{{ grade.teacher }}</td>
+        <td>
+          <span class="pointer" [routerLink]="'/teachers/' + grade.teacher.id"
+            >{{ grade.teacher.lastName }} {{ grade.teacher.firstName }}</span
+          >
+        </td>
         <td>{{ grade.subject.ects }}</td>
         <td>{{ grade.grade }}</td>
       </tr>
