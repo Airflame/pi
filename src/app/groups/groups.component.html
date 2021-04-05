@@ -1,0 +1,163 @@
+<div>
+  <div
+    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+  >
+    <h1 class="h2">Grupy zajęciowe</h1>
+  </div>
+  <div>
+    <div class="form-group form-inline">
+      Szukaj:
+      <input
+        class="form-control ml-2"
+        type="text"
+        name="searchTerm"
+        [(ngModel)]="groupsService.searchTerm"
+      />
+      <span class="ml-3" *ngIf="groupsService.loading$ | async"
+        >Ładowanie...</span
+      >
+      <div ngbDropdown class="d-inline-block ml-auto">
+        <button
+          class="btn btn-outline-primary"
+          id="dropdownBasic1"
+          ngbDropdownToggle
+        >
+          <span *ngIf="selectedDiscipline == null">Wszystkie kierunki</span>
+          <span *ngIf="selectedDiscipline != null">{{
+            selectedDiscipline
+          }}</span>
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button
+            ngbDropdownItem
+            (click)="
+              selectedDiscipline = null;
+              groupsService.setSelectedDiscipline(null)
+            "
+          >
+            Wszystkie kierunki
+          </button>
+          <button
+            ngbDropdownItem
+            *ngFor="let discipline of groupsService.disciplines"
+            (click)="
+              selectedDiscipline = discipline;
+              groupsService.setSelectedDiscipline(discipline)
+            "
+          >
+            {{ discipline }}
+          </button>
+        </div>
+      </div>
+      <div ngbDropdown class="d-inline-block ml-2">
+        <button
+          class="btn btn-outline-primary"
+          id="dropdownBasic1"
+          ngbDropdownToggle
+        >
+          <span *ngIf="selectedSemester == null">Wszystkie semestry</span>
+          <span *ngIf="selectedSemester != null"
+            >Semestr {{ selectedSemester }}</span
+          >
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button
+            ngbDropdownItem
+            (click)="
+              selectedSemester = null; groupsService.setSelectedSemester(null)
+            "
+          >
+            Wszystkie semestry
+          </button>
+          <button
+            ngbDropdownItem
+            *ngFor="let semester of groupsService.semesters"
+            (click)="
+              selectedSemester = semester;
+              groupsService.setSelectedSemester(semester)
+            "
+          >
+            Semestr {{ semester }}
+          </button>
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary ml-2">+ Dodaj</button>
+    </div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Semestr</th>
+          <th scope="col">Kierunek</th>
+          <th scope="col">Przedmiot</th>
+          <th scope="col">Prowadzący</th>
+          <th scope="col">Sala</th>
+          <th scope="col">Zapełnienie grup</th>
+          <th scope="col">Akcje</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let group of groups$ | async; index as i">
+          <td>
+            {{ group.subject.semester }}
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="group.subject.discipline"
+              [term]="groupsService.searchTerm"
+            ></ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="group.subject.name"
+              [term]="groupsService.searchTerm"
+            ></ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight
+              class="pointer"
+              [routerLink]="'/teachers/' + group.teacher.id"
+              [result]="group.teacher.lastName + ' ' + group.teacher.firstName"
+              [term]="groupsService.searchTerm"
+            ></ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="group.room"
+              [term]="groupsService.searchTerm"
+            ></ngb-highlight>
+          </td>
+          <td>
+            {{ group.max }}
+          </td>
+          <td>
+            <i
+              class="ti ti-layout-list-thumb text-info"
+              ngbTooltip="Szczegóły"
+              [routerLink]="'/groups/' + group.id"
+            ></i>
+            <i class="ti ti-pencil text-info ml-2" ngbTooltip="Edytuj"></i
+            ><i class="ti ti-trash text-danger ml-2" ngbTooltip="Usuń"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-between p-2">
+      <ngb-pagination
+        [collectionSize]="(total$ | async)!"
+        [(page)]="groupsService.page"
+        [pageSize]="groupsService.pageSize"
+      >
+      </ngb-pagination>
+      <select
+        class="custom-select"
+        style="width: auto"
+        name="pageSize"
+        [(ngModel)]="groupsService.pageSize"
+      >
+        <option [ngValue]="2">2 items per page</option>
+        <option [ngValue]="4">4 items per page</option>
+        <option [ngValue]="6">6 items per page</option>
+      </select>
+    </div>
+  </div>
+</div>

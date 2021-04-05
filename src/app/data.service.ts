@@ -288,6 +288,14 @@ export class DataService {
       .map((e) => this.mapToGrade(e));
   }
 
+  public getGroups(): Group[] {
+    return this.groups.sort((a, b) => {
+      if (a.subject.semester == b.subject.semester)
+        return a.subject.name > b.subject.name ? 1 : -1;
+      else return a.subject.semester - b.subject.semester;
+    });;
+  }
+
   public getGroupsByStudentId(studentId: number): Group[] {
     return this.enrollments
       .filter((e) => e.student.id == studentId && e.group.closed == false)
