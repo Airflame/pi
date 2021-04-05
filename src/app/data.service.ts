@@ -51,6 +51,7 @@ export interface Group {
   day: number;
   fromHour: string;
   toHour: string;
+  closed: boolean;
 }
 
 export interface Enrollment {
@@ -141,6 +142,7 @@ export class DataService {
       day: 4,
       fromHour: '08:00',
       toHour: '10:00',
+      closed: false
     },
     {
       id: 2,
@@ -152,6 +154,7 @@ export class DataService {
       day: 2,
       fromHour: '10:00',
       toHour: '12:00',
+      closed: false
     },
   ];
   private enrollments: Enrollment[] = [
@@ -209,6 +212,12 @@ export class DataService {
     else return '../../assets/images/blank.png';
   }
 
+  public addTeacherAvatar(id: number, image: ArrayBuffer) {
+    let avatar = this.teacherAvatars.find((av) => av.id === id);
+    if (avatar != null) avatar.image = image;
+    else this.teacherAvatars.push({ id, image } as Avatar);
+  }
+
   public getTeacherAvatar(id: number): string | ArrayBuffer {
     let avatar: Avatar = this.teacherAvatars.find((a) => a.id == id);
     if (avatar != null) return avatar.image;
@@ -253,6 +262,10 @@ export class DataService {
     return this.teachers;
   }
 
+  public getTeacher(id: number) {
+    return this.teachers.find((t) => t.id == id);
+  }
+
   public getDisciplines(): string[] {
     return this.disciplines;
   }
@@ -277,13 +290,23 @@ export class DataService {
 
   public getGroupsByStudentId(studentId: number): Group[] {
     return this.enrollments
-      .filter((e) => e.student.id == studentId && e.grade == null)
+      .filter((e) => e.student.id == studentId && e.group.closed == false)
       .map((e) => e.group)
       .sort((a, b) => {
         if (a.day == b.day) return a.fromHour > b.fromHour ? 1 : -1;
         else return a.day - b.day;
       });
   }
+
+  public getGroupsByTeacherId(teacherId: number): Group[] {
+    return this.groups
+      .filter((g) => g.teacher.id == teacherId && g.closed == false)
+      .sort((a, b) => {
+        if (a.day == b.day) return a.fromHour > b.fromHour ? 1 : -1;
+        else return a.day - b.day;
+      });
+  }
+
 
   private mapToGrade(enrollment: Enrollment): Grade {
     let grade = {} as Grade;

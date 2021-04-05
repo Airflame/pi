@@ -1,0 +1,21 @@
+<h4 class="h4">Prowadzone grupy</h4>
+<div class="overflow-auto mt-4">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Dzień tygodnia</th>
+        <th>Godziny</th>
+        <th>Przedmiot</th>
+        <th>Sala</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let group of groups; index as i">
+        <td>{{ dataService.getDay(group.day) }}</td>
+        <td>{{ group.fromHour }} - {{ group.toHour }}</td>
+        <td>{{ group.subject.name }}</td>
+        <td>{{ group.room }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

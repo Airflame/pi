@@ -1,7 +1,7 @@
 <div
   class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
 >
-  <h2 class="h2">{{ student.firstName }} {{ student.lastName }}</h2>
+  <h2 class="h2">{{teacher.title}} {{ teacher.firstName }} {{ teacher.lastName }}</h2>
 </div>
 <div class="container">
   <div class="row">
@@ -28,19 +28,16 @@
           </div>
           <div class="col-8">
             <div class="border-left pl-2">
-              <p>Numer indeksu: {{ student.id }}</p>
-              <p>Kierunek: {{ student.discipline }}</p>
-              <p>Rok: {{ student.classYear }}</p>
+              <p>{{ teacher.faculty }}</p>
             </div>
           </div>
         </div>
         <div class="row ml-1">
-          <app-student-grades [id]="id" style="width: 100%"></app-student-grades>
         </div>
       </div>
     </div>
     <div class="col">
-      <app-student-schedule [id]="id" style="width: 100%"></app-student-schedule>
+      <app-teacher-schedule [id]="id"></app-teacher-schedule>
     </div>
   </div>
 </div>

@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DataService, Grade, Group, Student } from 'src/app/data.service';
+import { DataService, Teacher } from 'src/app/data.service';
 
 @Component({
-  selector: 'app-student-details',
-  templateUrl: './student-details.component.html',
-  styleUrls: ['./student-details.component.scss']
+  selector: 'app-teacher-details',
+  templateUrl: './teacher-details.component.html',
+  styleUrls: ['./teacher-details.component.scss']
 })
-export class StudentDetailsComponent implements OnInit {
+export class TeacherDetailsComponent implements OnInit {
   id: number;
-  student: Student;
+  teacher: Teacher;
   url: string | ArrayBuffer;
-  grades: Grade[];
   private file: File;
 
   constructor(private route: ActivatedRoute, public dataService: DataService) { }
@@ -20,8 +19,8 @@ export class StudentDetailsComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params['id'];
     })
-    this.student = this.dataService.getStudent(this.id);
-    this.url = this.dataService.getStudentAvatar(this.id);
+    this.teacher = this.dataService.getTeacher(this.id);
+    this.url = this.dataService.getTeacherAvatar(this.id);
   }
 
   handleFileInput(target: EventTarget): void {
@@ -30,7 +29,7 @@ export class StudentDetailsComponent implements OnInit {
     reader.readAsDataURL(this.file);
     reader.onload = (_event) => {
         this.url = reader.result;
-        this.dataService.addStudentAvatar(this.id, this.url as ArrayBuffer);
+        this.dataService.addTeacherAvatar(this.id, this.url as ArrayBuffer);
     }
   }
 

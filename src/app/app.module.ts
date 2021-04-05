@@ -17,6 +17,8 @@ import { AddTeacherDialogComponent } from './teachers/add-teacher-dialog/add-tea
 import { EditTeacherDialogComponent } from './teachers/edit-teacher-dialog/edit-teacher-dialog.component';
 import { StudentGradesComponent } from './students/student-details/student-grades/student-grades.component';
 import { StudentScheduleComponent } from './students/student-details/student-schedule/student-schedule.component';
+import { TeacherDetailsComponent } from './teachers/teacher-details/teacher-details.component';
+import { TeacherScheduleComponent } from './teachers/teacher-details/teacher-schedule/teacher-schedule.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { StudentScheduleComponent } from './students/student-details/student-sch
     AddTeacherDialogComponent,
     EditTeacherDialogComponent,
     StudentGradesComponent,
-    StudentScheduleComponent
+    StudentScheduleComponent,
+    TeacherDetailsComponent,
+    TeacherScheduleComponent
   ],
   imports: [
     BrowserModule,

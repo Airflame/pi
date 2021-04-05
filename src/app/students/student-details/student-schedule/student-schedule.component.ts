@@ -7,12 +7,13 @@ import { DataService, Group } from 'src/app/data.service';
   styleUrls: ['./student-schedule.component.scss']
 })
 export class StudentScheduleComponent implements OnInit {
-  @Input() groups: Group[];
+  @Input() id: number;
+  groups: Group[];
 
   constructor(public dataService: DataService) { }
 
   ngOnInit(): void {
-    console.log(this.groups);
+    this.groups = this.dataService.getGroupsByStudentId(this.id);
   }
 
 }
