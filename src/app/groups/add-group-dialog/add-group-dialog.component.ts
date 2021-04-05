@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { OperatorFunction, Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { DataService, Group, Subject, Teacher } from 'src/app/data.service';
 
 @Component({
@@ -27,7 +29,8 @@ export class AddGroupDialogComponent implements OnInit {
     let groups = this.dataService.getGroups();
     this.group = {} as Group;
     this.group.id = groups[groups.length - 1].id + 1;
-    this.group.closed = false;
+    this.group.closed = true;
+    this.teachers = this.dataService.getTeachers();
   }
 
   save(): void {
