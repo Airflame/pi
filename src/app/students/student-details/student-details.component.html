@@ -35,34 +35,12 @@
           </div>
         </div>
         <div class="row ml-1">
-          <app-student-grades [id]="id" style="width: 100%"></app-student-grades>
+          <app-student-grades [grades]="grades" style="width: 100%"></app-student-grades>
         </div>
       </div>
     </div>
     <div class="col">
-      <div>
-        <h4 class="h4">Grupy zajęciowe</h4>
-        <table class="table table-hover mt-4">
-          <thead>
-            <tr>
-              <th scope="col">Dzień tygodnia</th>
-              <th scope="col">Godziny</th>
-              <th scope="col">Przedmiot</th>
-              <th scope="col">Prowadzący</th>
-              <th scope="col">Sala</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>asd</td>
-              <td>asd</td>
-              <td>asd</td>
-              <td>asd</td>
-              <td>asd</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <app-student-schedule [groups]="groups" style="width: 100%"></app-student-schedule>
     </div>
   </div>
 </div>

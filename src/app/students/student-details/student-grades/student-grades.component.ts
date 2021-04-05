@@ -8,13 +8,11 @@ import { DataService, Grade } from 'src/app/data.service';
   styleUrls: ['./student-grades.component.scss']
 })
 export class StudentGradesComponent implements OnInit {
-  @Input() id: number;
-  grades: Grade[];
+  @Input() grades: Grade[];
 
   constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
-    this.grades = this.dataService.getGrades(this.id);
   }
 
 }

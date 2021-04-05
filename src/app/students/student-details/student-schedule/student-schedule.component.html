@@ -1,1 +1,23 @@
-<p>student-schedule works!</p>
+<h4 class="h4">Grupy zajęciowe</h4>
+<div class="overflow-auto mt-4">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Dzień tygodnia</th>
+        <th>Godziny</th>
+        <th>Przedmiot</th>
+        <th>Prowadzący</th>
+        <th>Sala</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let group of groups; index as i">
+        <td>{{ dataService.getDay(group.day) }}</td>
+        <td>{{ group.fromHour }} - {{ group.toHour }}</td>
+        <td>{{ group.subject.name }}</td>
+        <td>{{ group.teacher.lastName }} {{ group.teacher.firstName }}</td>
+        <td>{{ group.room }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

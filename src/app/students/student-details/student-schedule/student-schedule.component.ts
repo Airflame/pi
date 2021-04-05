@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { DataService, Group } from 'src/app/data.service';
 
 @Component({
   selector: 'app-student-schedule',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./student-schedule.component.scss']
 })
 export class StudentScheduleComponent implements OnInit {
+  @Input() groups: Group[];
 
-  constructor() { }
+  constructor(public dataService: DataService) { }
 
   ngOnInit(): void {
+    console.log(this.groups);
   }
 
 }
