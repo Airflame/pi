@@ -1,1 +1,70 @@
-<p>group-details {{id}} works!</p>
+<div
+  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+>
+  <h2 class="h2">Grupa {{ id }}</h2>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="form-group form-inline">
+        <h4 class="h4">Studenci</h4>
+        <div ngbDropdown class="d-inline-block ml-auto">
+          <button type="button" class="btn btn-primary" (click)="addStudent()">+ Dodaj</button>
+        </div>
+      </div>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Zdjęcie</th>
+            <th scope="col">Nr indeksu</th>
+            <th scope="col">Imię</th>
+            <th scope="col">Nazwisko</th>
+            <th scope="col">Ocena</th>
+            <th scope="col">Akcje</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of students$ | async; index as i">
+            <td>
+              <img
+                [src]="dataService.getStudentAvatar(student.id)"
+                class="rounded picture"
+                alt="..."
+              />
+            </td>
+            <td>
+              <ngb-highlight
+                [result]="student.id"
+                [term]="studentsService.searchTerm"
+              ></ngb-highlight>
+            </td>
+            <td>
+              <ngb-highlight
+                [result]="student.firstName"
+                [term]="studentsService.searchTerm"
+              ></ngb-highlight>
+            </td>
+            <td>
+              <ngb-highlight
+                [result]="student.lastName"
+                [term]="studentsService.searchTerm"
+              ></ngb-highlight>
+            </td>
+            <td>
+              asdas
+            </td>
+            <td>
+              <i
+                class="ti ti-trash text-danger"
+                ngbTooltip="Usuń"
+              ></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col">
+      aaa
+    </div>
+  </div>
+</div>

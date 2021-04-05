@@ -254,6 +254,30 @@ export class DataService {
     return this.students;
   }
 
+  public getEnrolledStudents(group: Group): Student[] {
+    return this.enrollments
+      .filter((e) => e.group.id == group.id)
+      .map((e) => e.student);
+  }
+
+  public getAvailableStudents(group: Group): Student[] {
+    return this.students.filter(
+      (s) =>
+        s.discipline == group.subject.discipline &&
+        this.semesterInYear(group.subject.semester, s.classYear) &&
+        this.enrollments.find(
+          (e) => e.group.id == group.id && e.student.id == s.id
+        ) == null
+    );
+  }
+
+  public deleteEnrolledStudent(group: Group, student: Student): void {
+    const id = this.enrollments.findIndex(
+      (e) => e.group.id == group.id && e.student.id == student.id
+    );
+    this.enrollments.splice(id, 1);
+  }
+
   public getStudent(id: number) {
     return this.students.find((s) => s.id == id);
   }
@@ -308,7 +332,11 @@ export class DataService {
   public deleteGroup(group: Group) {
     const id = this.teachers.findIndex((g) => g.id == group.id);
     this.groups.splice(id, 1);
-    this.enrollments = this.enrollments.filter(e => e.group.id != group.id);
+    this.enrollments = this.enrollments.filter((e) => e.group.id != group.id);
+  }
+
+  public getGroup(id: number): Group {
+    return this.groups.find((g) => g.id == id);
   }
 
   public getGroups(): Group[] {
@@ -351,5 +379,14 @@ export class DataService {
 
   public getDay(day: number): string {
     return this.days[day - 1];
+  }
+
+  private semesterInYear(semester: number, year: string): boolean {
+    if (year == 'I' && (semester == 1 || semester == 2)) return true;
+    if (year == 'II' && (semester == 3 || semester == 4)) return true;
+    if (year == 'III' && (semester == 5 || semester == 6)) return true;
+    if (year == 'IV' && (semester == 7 || semester == 8)) return true;
+    if (year == 'V' && (semester == 9 || semester == 10)) return true;
+    return false;
   }
 }

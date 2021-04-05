@@ -23,6 +23,7 @@ import { GroupsComponent } from './groups/groups.component';
 import { AddGroupDialogComponent } from './groups/add-group-dialog/add-group-dialog.component';
 import { EditGroupDialogComponent } from './groups/edit-group-dialog/edit-group-dialog.component';
 import { GroupDetailsComponent } from './groups/group-details/group-details.component';
+import { EnrollStudentDialogComponent } from './groups/group-details/enroll-student-dialog/enroll-student-dialog.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { GroupDetailsComponent } from './groups/group-details/group-details.comp
     GroupsComponent,
     AddGroupDialogComponent,
     EditGroupDialogComponent,
-    GroupDetailsComponent
+    GroupDetailsComponent,
+    EnrollStudentDialogComponent
   ],
   imports: [
     BrowserModule,

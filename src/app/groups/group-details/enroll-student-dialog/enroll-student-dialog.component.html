@@ -1,0 +1,88 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Zapisz studentów</h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="modal.dismiss()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div>
+    <div class="form-group form-inline">
+      Szukaj:
+      <input
+        class="form-control ml-2"
+        type="text"
+        name="searchTerm"
+        [(ngModel)]="studentsService.searchTerm"
+      />
+      <span class="ml-3" *ngIf="studentsService.loading$ | async"
+        >Ładowanie...</span
+      >
+    </div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Zdjęcie</th>
+          <th scope="col">
+            Numer indeksu
+          </th>
+          <th scope="col">Imie</th>
+          <th scope="col">
+            Nazwisko
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students$ | async; index as i">
+          <td>
+            <img
+              [src]="dataService.getStudentAvatar(student.id)"
+              class="rounded picture"
+              alt="..."
+            />
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="student.id"
+              [term]="studentsService.searchTerm"
+            ></ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="student.firstName"
+              [term]="studentsService.searchTerm"
+            ></ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="student.lastName"
+              [term]="studentsService.searchTerm"
+            ></ngb-highlight>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-between p-2">
+      <ngb-pagination
+        [collectionSize]="(total$ | async)!"
+        [(page)]="studentsService.page"
+        [pageSize]="studentsService.pageSize"
+      >
+      </ngb-pagination>
+      <select
+        class="custom-select"
+        style="width: auto"
+        name="pageSize"
+        [(ngModel)]="studentsService.pageSize"
+      >
+        <option [ngValue]="2">2 items per page</option>
+        <option [ngValue]="4">4 items per page</option>
+        <option [ngValue]="6">6 items per page</option>
+      </select>
+    </div>
+  </div>
+</div>
