@@ -92,6 +92,7 @@
           <th scope="col">Semestr</th>
           <th scope="col">Przedmiot</th>
           <th scope="col">Prowadzący</th>
+          <th scope="col">Godziny</th>
           <th scope="col">Sala</th>
           <th scope="col">Zapełnienie grup</th>
           <th scope="col">Akcje</th>
@@ -120,6 +121,11 @@
             ></ngb-highlight>
           </td>
           <td>
+            {{ dataService.getDay(group.day) }}
+            {{ group.week == weekP ? "(P)" : group.week == weekN ? "(N)" : "" }}
+            {{ group.fromHour }} - {{ group.toHour }}
+          </td>
+          <td>
             <ngb-highlight
               [result]="group.room"
               [term]="groupsService.searchTerm"
@@ -134,8 +140,16 @@
               ngbTooltip="Szczegóły"
               [routerLink]="'/groups/' + group.id"
             ></i>
-            <i class="ti ti-pencil text-info ml-2" ngbTooltip="Edytuj"></i
-            ><i class="ti ti-trash text-danger ml-2" ngbTooltip="Usuń"></i>
+            <i
+              class="ti ti-pencil text-info ml-2"
+              ngbTooltip="Edytuj"
+              (click)="editGroup(group)"
+            ></i
+            ><i
+              class="ti ti-trash text-danger ml-2"
+              ngbTooltip="Usuń"
+              (click)="deleteGroup(group)"
+            ></i>
           </td>
         </tr>
       </tbody>

@@ -69,6 +69,7 @@ export class GroupsService {
     this._search$.next();
   }
 
+
   public setSelectedDiscipline(selectedDiscipline: string) {
     this.selectedDiscipline = selectedDiscipline;
     this.apply();
@@ -79,10 +80,10 @@ export class GroupsService {
     this.apply();
   }
 
-  // public deleteGroup(group: Group): void {
-  //   this.dataService.deleteGroup(group);
-  //   this.refresh();
-  // }
+  public deleteGroup(group: Group): void {
+    this.dataService.deleteGroup(group);
+    this.refresh();
+  }
 
   get groups$() {
     return this._groups$.asObservable();
