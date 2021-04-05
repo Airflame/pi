@@ -31,8 +31,7 @@ export class AvailableStudentsService {
   private _search$ = new Subject<void>();
   private _students$ = new BehaviorSubject<Student[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
-  private selectedDiscipline: string;
-  private selectedClassYear: string;
+  private selected: Student[] = [];
 
   private _state: State = {
     page: 1,
@@ -40,7 +39,9 @@ export class AvailableStudentsService {
     searchTerm: '',
   };
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService) {
+    this.students$.subscribe()
+  }
 
   public refresh(group: Group): void {
     this.students = this.dataService.getAvailableStudents(group);
@@ -60,6 +61,26 @@ export class AvailableStudentsService {
     });
 
     this._search$.next();
+  }
+
+  public select(student: Student, value: boolean) {
+    if (value) {
+      if (student != null) {
+        if (this.selected.find(s => s.id == student.id) == null)
+          this.selected.push(student);
+      }
+      else {
+        this.selected = [];
+        this.students.forEach(s => this.selected.push(s));
+      }
+    }
+    else {
+      if (student != null)
+        this.selected = this.selected.filter(s => s.id != student.id);
+      else
+        this.selected = [];
+    }
+    console.log(this.selected);
   }
 
   get students$() {
@@ -106,14 +127,6 @@ export class AvailableStudentsService {
     let students = this.students;
 
     // 2. filter
-    if (this.selectedDiscipline != null)
-      students = students.filter(
-        (student) => student.discipline == this.selectedDiscipline
-      );
-    if (this.selectedClassYear != null)
-      students = students.filter(
-        (student) => student.classYear == this.selectedClassYear
-      );
     students = students.filter((student) =>
       matches(student, searchTerm)
     );

@@ -31,8 +31,6 @@ export class EnrolledStudentsService {
   private _search$ = new Subject<void>();
   private _students$ = new BehaviorSubject<Student[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
-  private selectedDiscipline: string;
-  private selectedClassYear: string;
   private group: Group;
 
   private _state: State = {
@@ -113,14 +111,6 @@ export class EnrolledStudentsService {
     let students = this.students;
 
     // 2. filter
-    if (this.selectedDiscipline != null)
-      students = students.filter(
-        (student) => student.discipline == this.selectedDiscipline
-      );
-    if (this.selectedClassYear != null)
-      students = students.filter(
-        (student) => student.classYear == this.selectedClassYear
-      );
     students = students.filter((student) =>
       matches(student, searchTerm)
     );

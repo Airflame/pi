@@ -87,6 +87,13 @@ export class DataService {
       classYear: 'I',
     },
     {
+      id: 126,
+      firstName: 'Justyna',
+      lastName: 'Kowalczyk',
+      discipline: 'Informatyka',
+      classYear: 'I',
+    },
+    {
       id: 2137,
       firstName: 'Karol',
       lastName: 'Wojtyła',
