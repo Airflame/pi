@@ -131,9 +131,7 @@
               [term]="groupsService.searchTerm"
             ></ngb-highlight>
           </td>
-          <td>
-            {{ group.max }}
-          </td>
+          <td>{{ dataService.countStudents(group) }} / {{ group.max }}</td>
           <td>
             <i
               class="ti ti-layout-list-thumb text-info"
@@ -167,9 +165,9 @@
         name="pageSize"
         [(ngModel)]="groupsService.pageSize"
       >
-        <option [ngValue]="2">2 items per page</option>
-        <option [ngValue]="4">4 items per page</option>
-        <option [ngValue]="6">6 items per page</option>
+        <option [ngValue]="2">2</option>
+        <option [ngValue]="4">4</option>
+        <option [ngValue]="6">6</option>
       </select>
     </div>
   </div>

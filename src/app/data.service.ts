@@ -324,6 +324,10 @@ export class DataService {
     return this.subjects;
   }
 
+  public countStudents(group: Group): number {
+    return this.enrollments.filter((e) => e.group.id == group.id).length;
+  }
+
   public getGrades(studentId: number): Grade[] {
     return this.enrollments
       .filter((e) => e.student.id == studentId && e.grade != null)
@@ -365,7 +369,12 @@ export class DataService {
 
   public getGroupsByStudentId(studentId: number): Group[] {
     return this.enrollments
-      .filter((e) => e.student.id == studentId && e.group.closed == false)
+      .filter(
+        (e) =>
+          e.student.id == studentId &&
+          e.group.closed == false &&
+          e.grade == null
+      )
       .map((e) => e.group)
       .sort((a, b) => {
         if (a.day == b.day) return a.fromHour > b.fromHour ? 1 : -1;
@@ -393,6 +402,22 @@ export class DataService {
 
   public getDay(day: number): string {
     return this.days[day - 1];
+  }
+
+  public getStudentGrade(group: Group, student: Student): number {
+    return this.enrollments.find(
+      (e) => e.group.id == group.id && e.student.id == student.id
+    ).grade;
+  }
+
+  public setStudentGrade(group: Group, student: Student, grade: number): void {
+    this.enrollments.find(
+      (e) => e.group.id == group.id && e.student.id == student.id
+    ).grade = grade;
+  }
+
+  public getAvailableGrades(): number[] {
+    return [2.0, 3.0, 3.5, 4.0, 4.5, 5.0];
   }
 
   private semesterInYear(semester: number, year: string): boolean {

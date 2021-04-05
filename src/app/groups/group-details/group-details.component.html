@@ -1,7 +1,13 @@
 <div
   class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
 >
-  <h2 class="h2">Grupa {{ id }}</h2>
+  <h2 class="h2">
+    {{ group.subject.name }}
+  </h2>
+  <h2 class="h2 ml-auto">
+    {{ group.subject.discipline }}, Semestr
+    {{ group.subject.semester }}
+  </h2>
 </div>
 <div class="container">
   <div class="row">
@@ -9,7 +15,9 @@
       <div class="form-group form-inline">
         <h4 class="h4">Studenci</h4>
         <div ngbDropdown class="d-inline-block ml-auto">
-          <button type="button" class="btn btn-primary" (click)="addStudent()">+ Dodaj</button>
+          <button type="button" class="btn btn-primary" (click)="addStudent()">
+            + Dodaj
+          </button>
         </div>
       </div>
       <table class="table table-hover">
@@ -34,6 +42,8 @@
             </td>
             <td>
               <ngb-highlight
+                class="pointer"
+                [routerLink]="'/students/' + student.id"
                 [result]="student.id"
                 [term]="studentsService.searchTerm"
               ></ngb-highlight>
@@ -51,7 +61,30 @@
               ></ngb-highlight>
             </td>
             <td>
-              asdas
+              <div ngbDropdown>
+                <button
+                  class="btn btn-outline-primary"
+                  id="dropdownBasic1"
+                  ngbDropdownToggle
+                >
+                  {{
+                    dataService.getStudentGrade(group, student) | number: "1.1"
+                  }}
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <button
+                    ngbDropdownItem
+                    (click)="dataService.setStudentGrade(group, student, null)"
+                  >Brak</button>
+                  <button
+                    ngbDropdownItem
+                    *ngFor="let grade of dataService.getAvailableGrades()"
+                    (click)="dataService.setStudentGrade(group, student, grade)"
+                  >
+                    {{ grade | number: "1.1" }}
+                  </button>
+                </div>
+              </div>
             </td>
             <td>
               <i
@@ -64,8 +97,6 @@
         </tbody>
       </table>
     </div>
-    <div class="col">
-      aaa
-    </div>
+    <div class="col">aaa</div>
   </div>
 </div>

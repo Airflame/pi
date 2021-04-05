@@ -22,6 +22,7 @@ export class EditGroupDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.allSubjects = this.dataService.getSubjects();
+    this.teachers = this.dataService.getTeachers();
     this.subjects = this.allSubjects;
     this.disciplines = this.dataService.getDisciplines();
     this.semesters = [...new Set(this.allSubjects.map((s) => s.semester))];
