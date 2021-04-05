@@ -1,7 +1,7 @@
 import {Directive, EventEmitter, Input, Output} from '@angular/core';
-import {Teacher} from '../data.service';
+import {Group} from '../data.service';
 
-export type SortColumn = keyof Teacher | '';
+export type SortColumn = keyof Group | '';
 export type SortDirection = 'asc' | 'desc' | '';
 const rotate: {[key: string]: SortDirection} = { 'asc': 'desc', 'desc': '', '': 'asc' };
 

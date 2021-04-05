@@ -142,7 +142,7 @@ export class DataService {
       day: 4,
       fromHour: '08:00',
       toHour: '10:00',
-      closed: false
+      closed: false,
     },
     {
       id: 2,
@@ -154,7 +154,7 @@ export class DataService {
       day: 2,
       fromHour: '10:00',
       toHour: '12:00',
-      closed: false
+      closed: false,
     },
   ];
   private enrollments: Enrollment[] = [
@@ -282,18 +282,28 @@ export class DataService {
     return this.faculties;
   }
 
+  public getSubjects(): Subject[] {
+    return this.subjects;
+  }
+
   public getGrades(studentId: number): Grade[] {
     return this.enrollments
       .filter((e) => e.student.id == studentId && e.grade != null)
       .map((e) => this.mapToGrade(e));
   }
 
+  public addGroup(group: Group) {
+    this.groups.push(group);
+  }
+
   public getGroups(): Group[] {
     return this.groups.sort((a, b) => {
+      if (a.subject.discipline == b.subject.discipline)
+        return a.subject.semester - b.subject.semester;
       if (a.subject.semester == b.subject.semester)
         return a.subject.name > b.subject.name ? 1 : -1;
-      else return a.subject.semester - b.subject.semester;
-    });;
+      else return a.subject.discipline > b.subject.discipline ? 1 : -1;
+    });
   }
 
   public getGroupsByStudentId(studentId: number): Group[] {
@@ -314,7 +324,6 @@ export class DataService {
         else return a.day - b.day;
       });
   }
-
 
   private mapToGrade(enrollment: Enrollment): Grade {
     let grade = {} as Grade;

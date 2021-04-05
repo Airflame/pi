@@ -81,13 +81,15 @@
           </button>
         </div>
       </div>
-      <button type="button" class="btn btn-primary ml-2">+ Dodaj</button>
+      <button type="button" class="btn btn-primary ml-2" (click)="addGroup()">
+        + Dodaj
+      </button>
     </div>
     <table class="table table-hover">
       <thead>
         <tr>
-          <th scope="col">Semestr</th>
           <th scope="col">Kierunek</th>
+          <th scope="col">Semestr</th>
           <th scope="col">Przedmiot</th>
           <th scope="col">Prowadzący</th>
           <th scope="col">Sala</th>
@@ -98,13 +100,10 @@
       <tbody>
         <tr *ngFor="let group of groups$ | async; index as i">
           <td>
-            {{ group.subject.semester }}
+            {{ group.subject.discipline }}
           </td>
           <td>
-            <ngb-highlight
-              [result]="group.subject.discipline"
-              [term]="groupsService.searchTerm"
-            ></ngb-highlight>
+            {{ group.subject.semester }}
           </td>
           <td>
             <ngb-highlight

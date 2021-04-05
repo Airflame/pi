@@ -18,7 +18,6 @@ interface State {
 
 function matches(group: Group, term: string) {
   return (
-    group.subject.discipline.toLowerCase().includes(term.toLowerCase()) ||
     group.subject.name.toLowerCase().includes(term.toLowerCase()) ||
     group.teacher.lastName.toLowerCase().includes(term.toLowerCase()) ||
     group.teacher.firstName.toLowerCase().includes(term.toLowerCase()) ||

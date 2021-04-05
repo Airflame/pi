@@ -20,6 +20,7 @@ import { StudentScheduleComponent } from './students/student-details/student-sch
 import { TeacherDetailsComponent } from './teachers/teacher-details/teacher-details.component';
 import { TeacherScheduleComponent } from './teachers/teacher-details/teacher-schedule/teacher-schedule.component';
 import { GroupsComponent } from './groups/groups.component';
+import { AddGroupDialogComponent } from './groups/add-group-dialog/add-group-dialog.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { GroupsComponent } from './groups/groups.component';
     StudentScheduleComponent,
     TeacherDetailsComponent,
     TeacherScheduleComponent,
-    GroupsComponent
+    GroupsComponent,
+    AddGroupDialogComponent
   ],
   imports: [
     BrowserModule,

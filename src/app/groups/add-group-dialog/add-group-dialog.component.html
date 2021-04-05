@@ -1,0 +1,89 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Dodaj grupę</h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="modal.dismiss()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="form-group row required">
+    <label class="col-md-3 col-form-label">Kierunek</label>
+    <div class="col-md-9" ngbDropdown>
+      <button
+        class="btn btn-outline-primary"
+        id="dropdownDiscipline"
+        ngbDropdownToggle
+      >
+        {{ selectedDiscipline }}
+      </button>
+      <div ngbDropdownMenu aria-labelledby="dropdownDiscipline">
+        <button
+          ngbDropdownItem
+          class="dropdown-item"
+          *ngFor="let discipline of disciplines"
+          (click)="selectedDiscipline = discipline; filter()"
+        >
+          {{ discipline }}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row required">
+    <label class="col-md-3 col-form-label">Semestr</label>
+    <div class="col-md-9" ngbDropdown>
+      <button
+        class="btn btn-outline-primary"
+        id="dropdownDiscipline"
+        ngbDropdownToggle
+      >
+        <span *ngIf="selectedSemester != null">Semestr</span>
+        {{ selectedSemester }}
+      </button>
+      <div ngbDropdownMenu aria-labelledby="dropdownDiscipline">
+        <button
+          ngbDropdownItem
+          class="dropdown-item"
+          *ngFor="let semester of semesters"
+          (click)="selectedSemester = semester; filter()"
+        >
+          Semestr {{ semester }}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row required">
+    <label class="col-md-3 col-form-label">Przedmiot</label>
+    <div class="col-md-9" ngbDropdown>
+      <button
+        class="btn btn-outline-primary"
+        id="dropdownDiscipline"
+        ngbDropdownToggle
+      >
+      <span *ngIf="group.subject != null">{{ group.subject.name }}</span>
+      </button>
+      <div ngbDropdownMenu aria-labelledby="dropdownDiscipline">
+        <button
+          ngbDropdownItem
+          class="dropdown-item"
+          *ngFor="let subject of subjects"
+          (click)="group.subject = subject; filter()"
+        >
+          {{ subject.name }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-outline-primary"
+    (click)="save(); modal.close()"
+  >
+    Zapisz
+  </button>
+</div>
