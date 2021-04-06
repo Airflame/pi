@@ -104,7 +104,7 @@ export class EnrolledStudentsService {
   private _search(): Observable<SearchResult> {
     const { pageSize, page, searchTerm } = this._state;
 
-    let students = this.students.sort((a, b) => a.id - b.id);
+    let students = this.students.sort((a, b) => a.lastName > b.lastName ? 1 : -1);
 
     // 2. filter
     students = students.filter((student) => matches(student, searchTerm));

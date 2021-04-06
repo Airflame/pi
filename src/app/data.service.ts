@@ -948,7 +948,9 @@ export class DataService {
   public getEnrolledStudents(group: Group): Student[] {
     return this.enrollments
       .filter((e) => e.group.id == group.id)
-      .map((e) => e.student);
+      .map((e) => e.student).sort((a, b) => {
+        return a.lastName > b.lastName ? 1 : -1
+      });
   }
 
   public getAvailableStudents(group: Group): Student[] {
