@@ -41,7 +41,8 @@
             <td>
               <img
                 [src]="dataService.getStudentAvatar(student.id)"
-                class="rounded picture"
+                [routerLink]="'/students/' + student.id"
+                class="rounded picture pointer"
                 alt="..."
               />
             </td>
@@ -186,6 +187,8 @@
           <input
             type="number"
             class="form-control"
+            [class.is-valid]="dataService.countStudents(group) <= group.max"
+            [class.is-invalid]="dataService.countStudents(group) > group.max"
             style="width: 10em"
             min="1"
             [disabled]="group.closed"
