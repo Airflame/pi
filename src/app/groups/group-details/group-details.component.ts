@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
-import { DataService, Group, Student, Week } from 'src/app/data.service';
+import { DataService, Group, Student, Teacher, Week } from 'src/app/data.service';
 import { EnrollStudentDialogComponent } from './enroll-student-dialog/enroll-student-dialog.component';
 import { EnrolledStudentsService } from './enrolled-students.service';
 import { TimeDialogComponent } from './time-dialog/time-dialog.component';
@@ -20,6 +20,7 @@ export class GroupDetailsComponent implements OnInit {
   weekP: Week = Week.P;
   weekN: Week = Week.N;
   weekAll: Week = Week.ALL;
+  teachers: Teacher[];
 
   constructor(
     private route: ActivatedRoute,
@@ -36,6 +37,7 @@ export class GroupDetailsComponent implements OnInit {
       this.students$ = this.studentsService.students$;
       this.total$ = this.studentsService.total$;
     });
+    this.teachers = this.dataService.getTeachers();
   }
 
   addStudent(): void {

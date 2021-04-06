@@ -75,7 +75,9 @@
                   <button
                     ngbDropdownItem
                     (click)="dataService.setStudentGrade(group, student, null)"
-                  >Brak</button>
+                  >
+                    Brak
+                  </button>
                   <button
                     ngbDropdownItem
                     *ngFor="let grade of dataService.getAvailableGrades()"
@@ -98,37 +100,111 @@
       </table>
     </div>
     <div class="col">
-      <div class="form-group form-inline">
-        <h4 class="h4">Godziny</h4>
-        <div ngbDropdown class="d-inline-block ml-auto">
-          <button type="button" class="btn btn-primary" (click)="editTime()">
-            + Ustaw
-          </button>
+      <div>
+        <div style="display: inline-block">
+          <div class="form-group form-inline">
+            <h4 class="h4">Prowadzący</h4>
+          </div>
+          <div class="form-group row required ml-2">
+            <div ngbDropdown>
+              <button
+                class="btn btn-outline-primary"
+                id="dropdownDiscipline"
+                ngbDropdownToggle
+              >
+                <span *ngIf="group.teacher != null">{{
+                  group.teacher.lastName + " " + group.teacher.firstName
+                }}</span>
+              </button>
+              <div
+                ngbDropdownMenu
+                class="overflow-auto"
+                style="max-height: 300px"
+              >
+                <button
+                  ngbDropdownItem
+                  class="dropdown-item"
+                  *ngFor="let teacher of teachers"
+                  (click)="group.teacher = teacher"
+                >
+                  {{ teacher.lastName + " " + teacher.firstName }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="display: inline-block" class="ml-5">
+          <i [routerLink]="'/teachers/' + this.group.teacher.id">
+            <img
+              [src]="dataService.getTeacherAvatar(this.group.teacher.id)"
+              class="rounded lg-picture"
+              alt="..."
+            />
+          </i>
         </div>
       </div>
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">Dzień tygodnia</th>
-            <th scope="col">Od</th>
-            <th scope="col">Do</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              {{dataService.getDay(group.day)}}
-              {{ group.week == weekP ? "(P)" : group.week == weekN ? "(N)" : "" }}
-            </td>
-            <td>
-              {{group.fromHour}}
-            </td>
-            <td>
-              {{group.toHour}}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="mt-5" style="display: inline-block">
+        <div class="form-group form-inline">
+          <h4 class="h4">Liczba miejsc</h4>
+        </div>
+        <div class="form-group row required ml-2">
+          <input
+            type="number"
+            class="form-control"
+            style="width: 10em"
+            min="1"
+            [(ngModel)]="group.max"
+          />
+        </div>
+      </div>
+      <div class="mt-5 ml-5" style="display: inline-block">
+        <div class="form-group form-inline">
+          <h4 class="h4">Sala</h4>
+        </div>
+        <div class="form-group row required ml-2">
+          <input
+            type="text"
+            class="form-control"
+            style="width: 10em"
+            [(ngModel)]="group.room"
+          />
+        </div>
+      </div>
+      <div class="mt-5">
+        <div class="form-group form-inline">
+          <h4 class="h4">Godziny</h4>
+          <div ngbDropdown class="d-inline-block ml-auto">
+            <button type="button" class="btn btn-primary" (click)="editTime()">
+              + Ustaw
+            </button>
+          </div>
+        </div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Dzień tygodnia</th>
+              <th scope="col">Od</th>
+              <th scope="col">Do</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                {{ dataService.getDay(group.day) }}
+                {{
+                  group.week == weekP ? "(P)" : group.week == weekN ? "(N)" : ""
+                }}
+              </td>
+              <td>
+                {{ group.fromHour }}
+              </td>
+              <td>
+                {{ group.toHour }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
