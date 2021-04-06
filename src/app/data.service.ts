@@ -66,45 +66,129 @@ export interface Enrollment {
 export class DataService {
   private students: Student[] = [
     {
-      id: 123,
-      firstName: 'Jan',
-      lastName: 'Kowalski',
-      discipline: 'Informatyka',
-      classYear: 'I',
-    },
-    {
-      id: 124,
-      firstName: 'Adam',
-      lastName: 'Nowak',
+      id: 221,
+      firstName: 'Marceli',
+      lastName: 'Jóźwiak',
       discipline: 'Informatyka',
       classYear: 'II',
     },
     {
-      id: 125,
+      id: 222,
+      firstName: 'Laura',
+      lastName: 'Wolska',
+      discipline: 'Informatyka',
+      classYear: 'II',
+    },
+    {
+      id: 223,
       firstName: 'Julia',
-      lastName: 'Zalewska',
+      lastName: 'Górecka',
+      discipline: 'Informatyka',
+      classYear: 'II',
+    },
+    {
+      id: 224,
+      firstName: 'Filip',
+      lastName: 'Pietrzak',
+      discipline: 'Informatyka',
+      classYear: 'II',
+    },
+    {
+      id: 225,
+      firstName: 'Nikodem',
+      lastName: 'Bednarek',
+      discipline: 'Informatyka',
+      classYear: 'II',
+    },
+    {
+      id: 226,
+      firstName: 'Dawid',
+      lastName: 'Krupa',
+      discipline: 'Informatyka',
+      classYear: 'II',
+    },
+    {
+      id: 227,
+      firstName: 'Remigiusz',
+      lastName: 'Wawrzyniak',
       discipline: 'Informatyka',
       classYear: 'I',
     },
     {
-      id: 126,
-      firstName: 'Justyna',
+      id: 228,
+      firstName: 'Lucjan',
+      lastName: 'Madej',
+      discipline: 'Informatyka',
+      classYear: 'I',
+    },
+    {
+      id: 229,
+      firstName: 'Julia',
       lastName: 'Kowalczyk',
       discipline: 'Informatyka',
       classYear: 'I',
     },
     {
-      id: 2137,
-      firstName: 'Karol',
-      lastName: 'Wojtyła',
+      id: 230,
+      firstName: 'Błażej',
+      lastName: 'Górski',
       discipline: 'Informatyka',
-      classYear: 'XD',
+      classYear: 'I',
+    },
+    {
+      id: 231,
+      firstName: 'Łucja',
+      lastName: 'Sikorska',
+      discipline: 'Informatyka',
+      classYear: 'I',
+    },
+    {
+      id: 232,
+      firstName: 'Kazimiera',
+      lastName: 'Łuczak',
+      discipline: 'Informatyka',
+      classYear: 'I',
+    },
+    {
+      id: 233,
+      firstName: 'Lena',
+      lastName: 'Urbaniak',
+      discipline: 'Elektronika',
+      classYear: 'I',
+    },
+    {
+      id: 234,
+      firstName: 'Kazimierz',
+      lastName: 'Nowakowski',
+      discipline: 'Elektronika',
+      classYear: 'I',
+    },
+    {
+      id: 235,
+      firstName: 'Nataniel',
+      lastName: 'Piotrowski',
+      discipline: 'Elektronika',
+      classYear: 'I',
+    },
+    {
+      id: 236,
+      firstName: 'Amelia',
+      lastName: 'Nawrocka',
+      discipline: 'Elektronika',
+      classYear: 'I',
+    },
+    {
+      id: 237,
+      firstName: 'Mariola',
+      lastName: 'Wesołowska',
+      discipline: 'Elektronika',
+      classYear: 'I',
     },
   ];
   private teachers: Teacher[] = [
     {
       id: 1,
-      title: 'dr inż.',
+      title: 'prof. dr hab. inż.',
       firstName: 'Jan',
       lastName: 'Kowalski',
       faculty: 'Katedra Elektroniki',
@@ -114,7 +198,7 @@ export class DataService {
       title: 'mgr',
       firstName: 'Adam',
       lastName: 'Nowak',
-      faculty: 'Katedra Inżynierii Komputerowej',
+      faculty: 'Katedra Elektroniki',
     },
     {
       id: 3,
@@ -122,6 +206,27 @@ export class DataService {
       firstName: 'Justyna',
       lastName: 'Zalewska',
       faculty: 'Katedra Inżynierii Komputerowej',
+    },
+    {
+      id: 4,
+      title: 'dr',
+      firstName: 'Anita',
+      lastName: 'Ratajczak',
+      faculty: 'Instytut Matematyki',
+    },
+    {
+      id: 5,
+      title: 'dr inż.',
+      firstName: 'Wiktor',
+      lastName: 'Michalak',
+      faculty: 'Katedra Inżynierii Komputerowej',
+    },
+    {
+      id: 6,
+      title: 'dr',
+      firstName: 'Wanda',
+      lastName: 'Piątek',
+      faculty: 'Instytut Matematyki',
     },
   ];
   private subjects: Subject[] = [
@@ -189,6 +294,7 @@ export class DataService {
   private faculties: string[] = [
     'Katedra Inżynierii Komputerowej',
     'Katedra Elektroniki',
+    'Instytut Matematyki'
   ];
   private days: string[] = ['Pon', 'Wt', 'Śr', 'Czw', 'Pt'];
   private studentAvatars: Avatar[];
@@ -297,7 +403,9 @@ export class DataService {
   }
 
   public getTeachers(): Teacher[] {
-    return this.teachers;
+    return this.teachers.sort((a, b) => {
+      return a.lastName > b.lastName ? 1 : -1
+    });
   }
 
   public getTeacher(id: number) {

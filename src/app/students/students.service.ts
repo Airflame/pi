@@ -43,8 +43,7 @@ function matches(student: Student, term: string, pipe: PipeTransform) {
     student.firstName.toLowerCase().includes(term.toLowerCase()) ||
     student.lastName.toLowerCase().includes(term.toLowerCase()) ||
     student.id.toString().includes(term) ||
-    student.discipline.toLowerCase().includes(term.toLowerCase()) ||
-    student.classYear.toLowerCase().includes(term.toLowerCase())
+    student.discipline.toLowerCase().includes(term.toLowerCase())
   );
 }
 
