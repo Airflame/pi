@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
-import { DataService, Group, Student } from 'src/app/data.service';
+import { DataService, Group, Student, Week } from 'src/app/data.service';
 import { EnrollStudentDialogComponent } from './enroll-student-dialog/enroll-student-dialog.component';
 import { EnrolledStudentsService } from './enrolled-students.service';
+import { TimeDialogComponent } from './time-dialog/time-dialog.component';
 
 @Component({
   selector: 'app-group-details',
@@ -16,6 +17,9 @@ export class GroupDetailsComponent implements OnInit {
   group: Group;
   students$: Observable<Student[]>;
   total$: Observable<number>;
+  weekP: Week = Week.P;
+  weekN: Week = Week.N;
+  weekAll: Week = Week.ALL;
 
   constructor(
     private route: ActivatedRoute,
@@ -47,5 +51,13 @@ export class GroupDetailsComponent implements OnInit {
   deleteStudent(student: Student): void {
     this.dataService.deleteEnrolledStudent(this.group, student);
     this.studentsService.refresh(this.group);
+  }
+
+  editTime(): void {
+    const modalRef = this.modalService.open(TimeDialogComponent);
+    modalRef.componentInstance.group = this.group;
+    modalRef.result.then((val) => {
+      this.studentsService.refresh(this.group);
+    });
   }
 }

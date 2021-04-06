@@ -97,6 +97,38 @@
         </tbody>
       </table>
     </div>
-    <div class="col">aaa</div>
+    <div class="col">
+      <div class="form-group form-inline">
+        <h4 class="h4">Godziny</h4>
+        <div ngbDropdown class="d-inline-block ml-auto">
+          <button type="button" class="btn btn-primary" (click)="editTime()">
+            + Ustaw
+          </button>
+        </div>
+      </div>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Dzień tygodnia</th>
+            <th scope="col">Od</th>
+            <th scope="col">Do</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              {{dataService.getDay(group.day)}}
+              {{ group.week == weekP ? "(P)" : group.week == weekN ? "(N)" : "" }}
+            </td>
+            <td>
+              {{group.fromHour}}
+            </td>
+            <td>
+              {{group.toHour}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
