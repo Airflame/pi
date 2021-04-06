@@ -95,6 +95,7 @@
           <th scope="col">Godziny</th>
           <th scope="col">Sala</th>
           <th scope="col">Zapełnienie grup</th>
+          <th scope="col">Zamknięte</th>
           <th scope="col">Akcje</th>
         </tr>
       </thead>
@@ -131,7 +132,31 @@
               [term]="groupsService.searchTerm"
             ></ngb-highlight>
           </td>
-          <td>{{ dataService.countStudents(group) }} / {{ group.max }}</td>
+          <td>
+            <ngb-progressbar
+              [type]="
+                dataService.countStudents(group) > group.max
+                  ? 'danger'
+                  : dataService.countStudents(group) == group.max
+                  ? 'warning'
+                  : 'success'
+              "
+              [value]="(dataService.countStudents(group) / group.max) * 100"
+              >{{ dataService.countStudents(group) }} /
+              {{ group.max }}</ngb-progressbar
+            >
+          </td>
+          <td>
+            <div class="custom-control custom-checkbox">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                [id]="'check'"
+                [checked]="group.closed"
+                disabled
+              />
+            </div>
+          </td>
           <td>
             <i
               class="ti ti-layout-list-thumb text-info"
@@ -165,10 +190,11 @@
         name="pageSize"
         [(ngModel)]="groupsService.pageSize"
       >
-        <option [ngValue]="2">2</option>
-        <option [ngValue]="4">4</option>
-        <option [ngValue]="6">6</option>
+        <option [ngValue]="5">5</option>
+        <option [ngValue]="10">10</option>
+        <option [ngValue]="15">15</option>
       </select>
     </div>
   </div>
+  <div style="height: 3em"></div>
 </div>

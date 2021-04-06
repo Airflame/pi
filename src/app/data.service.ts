@@ -309,103 +309,103 @@ export class DataService {
       subject: this.subjects[0],
       teacher: this.teachers[0],
       room: '3A',
-      max: 25,
+      max: 15,
       week: Week.ALL,
       day: 1,
       fromHour: '08:00',
       toHour: '10:00',
-      closed: false,
+      closed: true,
     },
     {
       id: 2,
       subject: this.subjects[1],
       teacher: this.teachers[3],
       room: '4A',
-      max: 25,
+      max: 14,
       week: Week.ALL,
       day: 1,
       fromHour: '10:00',
       toHour: '12:00',
-      closed: false,
+      closed: true,
     },
     {
       id: 3,
       subject: this.subjects[2],
       teacher: this.teachers[2],
       room: '3B',
-      max: 25,
+      max: 6,
       week: Week.N,
       day: 2,
       fromHour: '12:00',
       toHour: '15:00',
-      closed: false,
+      closed: true,
     },
     {
       id: 4,
       subject: this.subjects[3],
       teacher: this.teachers[5],
       room: '3B',
-      max: 25,
+      max: 7,
       week: Week.P,
       day: 3,
       fromHour: '08:00',
       toHour: '11:00',
-      closed: false,
+      closed: true,
     },
     {
       id: 5,
       subject: this.subjects[4],
       teacher: this.teachers[1],
       room: '3A',
-      max: 25,
+      max: 6,
       week: Week.ALL,
       day: 2,
       fromHour: '15:00',
       toHour: '17:00',
-      closed: false,
+      closed: true,
     },
     {
       id: 6,
       subject: this.subjects[5],
       teacher: this.teachers[2],
       room: '4A',
-      max: 25,
+      max: 5,
       week: Week.ALL,
       day: 5,
       fromHour: '08:00',
       toHour: '10:00',
-      closed: false,
+      closed: true,
     },
     {
       id: 7,
       subject: this.subjects[6],
       teacher: this.teachers[4],
       room: '3B',
-      max: 25,
+      max: 8,
       week: Week.N,
       day: 5,
       fromHour: '10:00',
       toHour: '12:00',
-      closed: false,
+      closed: true,
     },
     {
       id: 8,
       subject: this.subjects[7],
       teacher: this.teachers[5],
       room: '3B',
-      max: 25,
+      max: 9,
       week: Week.P,
       day: 5,
       fromHour: '13:00',
       toHour: '15:00',
-      closed: false,
+      closed: true,
     },
     {
       id: 9,
       subject: this.subjects[8],
       teacher: this.teachers[3],
       room: '3A',
-      max: 25,
+      max: 11,
       week: Week.ALL,
       day: 4,
       fromHour: '15:00',
@@ -417,7 +417,7 @@ export class DataService {
       subject: this.subjects[9],
       teacher: this.teachers[1],
       room: '4A',
-      max: 25,
+      max: 12,
       week: Week.ALL,
       day: 4,
       fromHour: '08:00',
@@ -429,7 +429,7 @@ export class DataService {
       subject: this.subjects[10],
       teacher: this.teachers[2],
       room: '3B',
-      max: 25,
+      max: 17,
       week: Week.N,
       day: 4,
       fromHour: '10:00',
@@ -441,23 +441,421 @@ export class DataService {
       subject: this.subjects[11],
       teacher: this.teachers[4],
       room: '3B',
-      max: 25,
+      max: 12,
       week: Week.P,
       day: 4,
       fromHour: '13:00',
       toHour: '15:00',
       closed: false,
-    }
+    },
+    {
+      id: 13,
+      subject: this.subjects[0],
+      teacher: this.teachers[0],
+      room: '3A',
+      max: 6,
+      week: Week.ALL,
+      day: 1,
+      fromHour: '09:00',
+      toHour: '11:00',
+      closed: false,
+    },
+    {
+      id: 14,
+      subject: this.subjects[1],
+      teacher: this.teachers[3],
+      room: '4A',
+      max: 15,
+      week: Week.ALL,
+      day: 1,
+      fromHour: '11:00',
+      toHour: '13:00',
+      closed: false,
+    },
+    {
+      id: 15,
+      subject: this.subjects[2],
+      teacher: this.teachers[2],
+      room: '3B',
+      max: 13,
+      week: Week.N,
+      day: 2,
+      fromHour: '13:00',
+      toHour: '16:00',
+      closed: false,
+    },
+    {
+      id: 16,
+      subject: this.subjects[3],
+      teacher: this.teachers[5],
+      room: '3B',
+      max: 12,
+      week: Week.P,
+      day: 3,
+      fromHour: '09:00',
+      toHour: '12:00',
+      closed: false,
+    },
   ];
   private enrollments: Enrollment[] = [
     {
       group: this.groups[0],
       student: this.students[0],
+      grade: 3.5,
+    },
+    {
+      group: this.groups[0],
+      student: this.students[1],
       grade: 4.5,
+    },
+    {
+      group: this.groups[0],
+      student: this.students[2],
+      grade: 3.0,
+    },
+    {
+      group: this.groups[0],
+      student: this.students[3],
+      grade: 4.5,
+    },
+    {
+      group: this.groups[0],
+      student: this.students[4],
+      grade: 4.0,
+    },
+    {
+      group: this.groups[0],
+      student: this.students[5],
+      grade: 5.0,
     },
     {
       group: this.groups[1],
       student: this.students[0],
+      grade: 3.5,
+    },
+    {
+      group: this.groups[1],
+      student: this.students[1],
+      grade: 3.5,
+    },
+    {
+      group: this.groups[1],
+      student: this.students[2],
+      grade: 4.0,
+    },
+    {
+      group: this.groups[1],
+      student: this.students[3],
+      grade: 3.5,
+    },
+    {
+      group: this.groups[1],
+      student: this.students[4],
+      grade: 5.0,
+    },
+    {
+      group: this.groups[1],
+      student: this.students[5],
+      grade: 3.0,
+    },
+    {
+      group: this.groups[2],
+      student: this.students[0],
+      grade: 4.5,
+    },
+    {
+      group: this.groups[2],
+      student: this.students[1],
+      grade: 4.0,
+    },
+    {
+      group: this.groups[2],
+      student: this.students[2],
+      grade: 4.0,
+    },
+    {
+      group: this.groups[2],
+      student: this.students[3],
+      grade: 3.5,
+    },
+    {
+      group: this.groups[2],
+      student: this.students[4],
+      grade: 4.5,
+    },
+    {
+      group: this.groups[2],
+      student: this.students[5],
+      grade: 5.0,
+    },
+    {
+      group: this.groups[3],
+      student: this.students[0],
+      grade: 3.5,
+    },
+    {
+      group: this.groups[3],
+      student: this.students[1],
+      grade: 3.0,
+    },
+    {
+      group: this.groups[3],
+      student: this.students[2],
+      grade: 3.0,
+    },
+    {
+      group: this.groups[3],
+      student: this.students[3],
+      grade: 4.5,
+    },
+    {
+      group: this.groups[3],
+      student: this.students[4],
+      grade: 5.0,
+    },
+    {
+      group: this.groups[3],
+      student: this.students[5],
+      grade: 5.0,
+    },
+    {
+      group: this.groups[4],
+      student: this.students[0],
+      grade: 4.5,
+    },
+    {
+      group: this.groups[4],
+      student: this.students[1],
+      grade: 3.5,
+    },
+    {
+      group: this.groups[4],
+      student: this.students[2],
+      grade: 4.5,
+    },
+    {
+      group: this.groups[4],
+      student: this.students[3],
+      grade: 3.5,
+    },
+    {
+      group: this.groups[4],
+      student: this.students[4],
+      grade: 3.0,
+    },
+    {
+      group: this.groups[4],
+      student: this.students[5],
+      grade: 4.0,
+    },
+    {
+      group: this.groups[5],
+      student: this.students[0],
+      grade: 4.0,
+    },
+    {
+      group: this.groups[5],
+      student: this.students[1],
+      grade: 3.0,
+    },
+    {
+      group: this.groups[5],
+      student: this.students[2],
+      grade: 4.0,
+    },
+    {
+      group: this.groups[5],
+      student: this.students[3],
+      grade: 3.0,
+    },
+    {
+      group: this.groups[5],
+      student: this.students[4],
+      grade: 3.5,
+    },
+    {
+      group: this.groups[5],
+      student: this.students[5],
+      grade: 4.5,
+    },
+    {
+      group: this.groups[6],
+      student: this.students[0],
+      grade: 3.0,
+    },
+    {
+      group: this.groups[6],
+      student: this.students[1],
+      grade: 3.5,
+    },
+    {
+      group: this.groups[6],
+      student: this.students[2],
+      grade: 4.5,
+    },
+    {
+      group: this.groups[6],
+      student: this.students[3],
+      grade: 5.0,
+    },
+    {
+      group: this.groups[6],
+      student: this.students[4],
+      grade: 4.5,
+    },
+    {
+      group: this.groups[6],
+      student: this.students[5],
+      grade: 3.5,
+    },
+    {
+      group: this.groups[7],
+      student: this.students[0],
+      grade: 3.5,
+    },
+    {
+      group: this.groups[7],
+      student: this.students[1],
+      grade: 4.5,
+    },
+    {
+      group: this.groups[7],
+      student: this.students[2],
+      grade: 3.5,
+    },
+    {
+      group: this.groups[7],
+      student: this.students[3],
+      grade: 4.5,
+    },
+    {
+      group: this.groups[7],
+      student: this.students[4],
+      grade: 4.0,
+    },
+    {
+      group: this.groups[7],
+      student: this.students[5],
+      grade: 4.5,
+    },
+    {
+      group: this.groups[8],
+      student: this.students[0],
+      grade: null,
+    },
+    {
+      group: this.groups[8],
+      student: this.students[1],
+      grade: null,
+    },
+    {
+      group: this.groups[8],
+      student: this.students[2],
+      grade: null,
+    },
+    {
+      group: this.groups[8],
+      student: this.students[3],
+      grade: null,
+    },
+    {
+      group: this.groups[8],
+      student: this.students[4],
+      grade: null,
+    },
+    {
+      group: this.groups[8],
+      student: this.students[5],
+      grade: null,
+    },
+    {
+      group: this.groups[9],
+      student: this.students[0],
+      grade: null,
+    },
+    {
+      group: this.groups[9],
+      student: this.students[1],
+      grade: null,
+    },
+    {
+      group: this.groups[9],
+      student: this.students[2],
+      grade: null,
+    },
+    {
+      group: this.groups[9],
+      student: this.students[3],
+      grade: null,
+    },
+    {
+      group: this.groups[9],
+      student: this.students[4],
+      grade: null,
+    },
+    {
+      group: this.groups[9],
+      student: this.students[5],
+      grade: null,
+    },
+    {
+      group: this.groups[10],
+      student: this.students[0],
+      grade: null,
+    },
+    {
+      group: this.groups[10],
+      student: this.students[1],
+      grade: null,
+    },
+    {
+      group: this.groups[10],
+      student: this.students[2],
+      grade: null,
+    },
+    {
+      group: this.groups[10],
+      student: this.students[3],
+      grade: null,
+    },
+    {
+      group: this.groups[10],
+      student: this.students[4],
+      grade: null,
+    },
+    {
+      group: this.groups[10],
+      student: this.students[5],
+      grade: null,
+    },
+    {
+      group: this.groups[11],
+      student: this.students[0],
+      grade: null,
+    },
+    {
+      group: this.groups[11],
+      student: this.students[1],
+      grade: null,
+    },
+    {
+      group: this.groups[11],
+      student: this.students[2],
+      grade: null,
+    },
+    {
+      group: this.groups[11],
+      student: this.students[3],
+      grade: null,
+    },
+    {
+      group: this.groups[11],
+      student: this.students[4],
+      grade: null,
+    },
+    {
+      group: this.groups[11],
+      student: this.students[5],
       grade: null,
     },
   ];
@@ -474,7 +872,7 @@ export class DataService {
   private faculties: string[] = [
     'Katedra Inżynierii Komputerowej',
     'Katedra Elektroniki',
-    'Instytut Matematyki'
+    'Instytut Matematyki',
   ];
   private days: string[] = ['Pon', 'Wt', 'Śr', 'Czw', 'Pt'];
   private studentAvatars: Avatar[];
@@ -584,7 +982,7 @@ export class DataService {
 
   public getTeachers(): Teacher[] {
     return this.teachers.sort((a, b) => {
-      return a.lastName > b.lastName ? 1 : -1
+      return a.lastName > b.lastName ? 1 : -1;
     });
   }
 
@@ -647,11 +1045,13 @@ export class DataService {
 
   public getGroups(): Group[] {
     return this.groups.sort((a, b) => {
-      if (a.subject.discipline == b.subject.discipline)
-        return a.subject.semester - b.subject.semester;
-      if (a.subject.semester == b.subject.semester)
-        return a.subject.name > b.subject.name ? 1 : -1;
-      else return a.subject.discipline > b.subject.discipline ? 1 : -1;
+      if (a.closed == b.closed) {
+        if (a.subject.discipline == b.subject.discipline) {
+          if (a.subject.semester == b.subject.semester)
+            return a.subject.name > b.subject.name ? 1 : -1;
+          else return a.subject.semester - b.subject.semester;
+        } else return a.subject.discipline > b.subject.discipline ? 1 : -1;
+      } else return a.closed > b.closed ? 1 : -1;
     });
   }
 
