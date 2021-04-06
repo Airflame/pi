@@ -50,7 +50,9 @@ export class GroupsService {
   public refresh(): void {
     this.groups = this.dataService.getGroups();
     this.disciplines = this.dataService.getDisciplines();
-    this.semesters = [...new Set(this.groups.map(g => g.subject.semester))]
+    this.semesters = [
+      ...new Set(this.groups.map((g) => g.subject.semester)),
+    ].sort((a, b) => a - b);
     this.apply();
   }
 
@@ -68,7 +70,6 @@ export class GroupsService {
 
     this._search$.next();
   }
-
 
   public setSelectedDiscipline(selectedDiscipline: string) {
     this.selectedDiscipline = selectedDiscipline;
@@ -120,11 +121,7 @@ export class GroupsService {
   }
 
   private _search(): Observable<SearchResult> {
-    const {
-      pageSize,
-      page,
-      searchTerm,
-    } = this._state;
+    const { pageSize, page, searchTerm } = this._state;
 
     // 1. sort
     let groups = this.groups;

@@ -15,7 +15,12 @@
       <div class="form-group form-inline">
         <h4 class="h4">Studenci</h4>
         <div ngbDropdown class="d-inline-block ml-auto">
-          <button type="button" class="btn btn-primary" (click)="addStudent()">
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="addStudent()"
+            [disabled]="group.closed"
+          >
             + Dodaj
           </button>
         </div>
@@ -65,6 +70,7 @@
                 <button
                   class="btn btn-outline-primary"
                   id="dropdownBasic1"
+                  [disabled]="group.closed"
                   ngbDropdownToggle
                 >
                   {{
@@ -119,15 +125,26 @@
     </div>
     <div class="col">
       <div>
-        <div style="display: inline-block">
-          <div class="form-group form-inline">
-            <h4 class="h4">Prowadzący</h4>
+        <div class="form-group form-inline">
+          <h4 class="h4">Prowadzący</h4>
+          <div *ngIf="!group.closed" class="ml-auto">
+            <button class="btn btn-danger" (click)="group.closed = true">
+              Zamknij
+            </button>
           </div>
+          <div *ngIf="group.closed" class="ml-auto">
+            <button class="btn btn-info" (click)="group.closed = false">
+              Otwórz
+            </button>
+          </div>
+        </div>
+        <div style="display: inline-block">
           <div class="form-group row required ml-2">
             <div ngbDropdown>
               <button
                 class="btn btn-outline-primary"
                 id="dropdownDiscipline"
+                [disabled]="group.closed"
                 ngbDropdownToggle
               >
                 <span *ngIf="group.teacher != null">{{
@@ -171,6 +188,7 @@
             class="form-control"
             style="width: 10em"
             min="1"
+            [disabled]="group.closed"
             [(ngModel)]="group.max"
           />
         </div>
@@ -184,6 +202,7 @@
             type="text"
             class="form-control"
             style="width: 10em"
+            [disabled]="group.closed"
             [(ngModel)]="group.room"
           />
         </div>
@@ -192,7 +211,12 @@
         <div class="form-group form-inline">
           <h4 class="h4">Godziny</h4>
           <div ngbDropdown class="d-inline-block ml-auto">
-            <button type="button" class="btn btn-primary" (click)="editTime()">
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="editTime()"
+              [disabled]="group.closed"
+            >
               + Ustaw
             </button>
           </div>

@@ -1060,8 +1060,7 @@ export class DataService {
       .filter(
         (e) =>
           e.student.id == studentId &&
-          e.group.closed == false &&
-          e.grade == null
+          e.group.closed == false
       )
       .map((e) => e.group)
       .sort((a, b) => {
