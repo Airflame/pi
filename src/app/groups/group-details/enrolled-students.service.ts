@@ -35,7 +35,7 @@ export class EnrolledStudentsService {
 
   private _state: State = {
     page: 1,
-    pageSize: 4,
+    pageSize: 5,
     searchTerm: '',
   };
 
